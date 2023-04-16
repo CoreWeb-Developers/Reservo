@@ -5,7 +5,7 @@ import { LOGO_FONT } from '~/consts/components';
 const Logo = () => {
   return (
     <Heading fontSize="50px" color="secondary" mb="40px" fontFamily={LOGO_FONT}>
-      <ReactRouterLink to="/">Uevent</ReactRouterLink>
+      <ReactRouterLink to="/">Reservo</ReactRouterLink>
     </Heading>
   );
 };
