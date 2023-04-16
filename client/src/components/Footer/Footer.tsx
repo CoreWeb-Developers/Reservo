@@ -7,7 +7,7 @@ const Footer = () => {
       <HorizontalWavesAnim width="100%" />
       <Flex align="center" justify="center" bgColor="secondary" h="50px">
         <Text fontSize="12px" color="white">
-          &copy; 2023 UEVENT. All Rights Reserved.{' '}
+          &copy; 2023 Reservo. All Rights Reserved.{' '}
         </Text>
       </Flex>
     </Box>
