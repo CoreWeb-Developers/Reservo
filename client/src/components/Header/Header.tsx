@@ -74,7 +74,7 @@ const Header = () => {
         <Box>
           <ReactRouterLink to="/">
             <Heading size="xl" color="secondary" fontFamily={LOGO_FONT} lineHeight="1">
-              Uevent
+              Reservo
             </Heading>
           </ReactRouterLink>
         </Box>
