@@ -22,10 +22,10 @@ const HomePromo = () => {
               fontSize={{ base: '28px', sm: '30px', lg: '36px' }}
               mb={{ base: '10px', sm: '0' }}
             >
-              Let's Make Live Happen
+              Boost Your Business with Our Freelancer & SMB Listing & Booking Platform!
             </Heading>
             <Text fontSize={{ base: '16px', sm: '18px', lg: '20px' }}>
-              Shop millions of live events and discover can't-miss concerts, games, theater and more.
+            Showcase, Promote, and Book Services and Events with Ease!
             </Text>
           </Flex>
           <PromoWavesAnim width="100%" />
