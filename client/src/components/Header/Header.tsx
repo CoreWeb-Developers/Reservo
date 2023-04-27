@@ -5,6 +5,7 @@ import {
   HStack,
   Icon,
   IconButton,
+  Image,
   Link,
   Menu,
   MenuButton,
@@ -73,9 +74,7 @@ const Header = () => {
         </Box>
         <Box>
           <ReactRouterLink to="/">
-            <Heading size="xl" color="secondary" fontFamily={LOGO_FONT} lineHeight="1">
-              Reservo
-            </Heading>
+            <Image src="public/assets/reservo 2.png" alt="Reservo Logo" />
           </ReactRouterLink>
         </Box>
         <HStack align="center" spacing={6}>
