@@ -1,12 +1,11 @@
-import { Heading } from '@chakra-ui/react';
+import { Image } from '@chakra-ui/react';
 import { Link as ReactRouterLink } from 'react-router-dom';
-import { LOGO_FONT } from '~/consts/components';
 
 const Logo = () => {
   return (
-    <Heading fontSize="50px" color="secondary" mb="40px" fontFamily={LOGO_FONT}>
-      <ReactRouterLink to="/">Reservo</ReactRouterLink>
-    </Heading>
+    <ReactRouterLink to="/">
+      <Image src="/public/assets/reservo_1.png" alt="Logo" maxW="120px" />
+    </ReactRouterLink>
   );
 };
 
