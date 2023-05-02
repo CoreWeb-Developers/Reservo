@@ -21,6 +21,7 @@ import NavbarAuth from './NavbarAuth';
 
 const links = [
   { href: '/', label: 'Events' },
+  { href: '/', label: 'Services' },
   { href: '/companies', label: 'Companies' },
 ];
 
