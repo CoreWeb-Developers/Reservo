@@ -9,7 +9,7 @@ const userCompanies = prisma.subscriptionToCompany;
 const findCompanyOrThrow = async (id: number) => {
   const exists = await company.findUnique({ where: { id } });
   if (!exists) {
-    throw new ClientError('This company does not exist', 404);
+    throw new ClientError('This business does not exist', 404);
   }
 };
 
