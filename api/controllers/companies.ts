@@ -19,7 +19,7 @@ const checkFor = async (key: string, value: string, notId: number = 0) => {
     },
   });
   if (exists) {
-    throw new ClientError(`The company with this ${key} already exists.`, 400);
+    throw new ClientError(`The business with this ${key} already exists.`, 400);
   }
 };
 
