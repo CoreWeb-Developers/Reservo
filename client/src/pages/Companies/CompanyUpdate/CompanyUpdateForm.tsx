@@ -44,7 +44,7 @@ const CompanyUpdateForm = ({ company, setEdit }: IProps) => {
 
   const { handler: updateHandler } = useRequestHandler<IUpdate & { id: number }>({
     f: update,
-    successMsg: "You've successfully updated the company",
+    successMsg: "You've successfully updated the business",
   });
 
   const onSubmit = async (data: IUpdate) => {

@@ -1,7 +1,7 @@
 import AllCompaniesPage from './AllCompaniesPage/AllCompaniesPage';
 
 const CompaniesMainPage = () => {
-  return <AllCompaniesPage heading="Companies" />;
+  return <AllCompaniesPage heading="Businesses" />;
 };
 
 export default CompaniesMainPage;
