@@ -68,7 +68,7 @@ const CompanyInfo = ({ company, setEdit }: IProps) => {
 
   const { handler: deleteHandler } = useRequestHandler<number>({
     f: deleteCompany,
-    successMsg: "You've successfully deleted the company",
+    successMsg: "You've successfully deleted the business",
     successF: () => {
       navigate('/');
     },

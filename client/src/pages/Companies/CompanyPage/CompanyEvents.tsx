@@ -20,7 +20,7 @@ const CompanyEvents = ({ isCurUserOwner }: IProps) => {
     <Container sx={{ mt: '20px' }}>
       <VStack spacing="4" align="flex-start">
         <Heading as="h3" fontSize="24px">
-          This company's events
+          This business's events
         </Heading>
         <EventSearch setSearch={setSearch} />
       </VStack>
