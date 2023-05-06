@@ -29,7 +29,7 @@ const CompanyFormAvatar = ({ company }: IProps) => {
   const updateHandler = async (data: FormData) => {
     try {
       await updateAvatar({ form: data, id: company.id }).unwrap();
-      toast("You've successfully updated company's avatar.", 'success');
+      toast("You've successfully updated business's avatar.", 'success');
       reset();
     } catch (error: any) {
       toast(error.data.message, 'error');
@@ -38,7 +38,7 @@ const CompanyFormAvatar = ({ company }: IProps) => {
 
   const { handler: deleteHandler } = useRequestHandler<number>({
     f: deleteAvatar,
-    successMsg: "You've successfully removed company's avatar.",
+    successMsg: "You've successfully removed business's avatar.",
   });
 
   const { onSubmit } = useFileSubmit({ handleSubmit, requestHandler: updateHandler, reset });
