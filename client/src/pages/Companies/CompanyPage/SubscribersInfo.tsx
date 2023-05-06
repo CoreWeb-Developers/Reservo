@@ -21,12 +21,12 @@ const SubscribersInfo = ({ company }: IProps) => {
   const [subscribe, { isLoading: isSubsribeLoading, error: subError }] = useSubscribeMutation();
   const { handler: subscribeHandler } = useRequestHandler<number>({
     f: subscribe,
-    successMsg: "You've successfully subscribed to the company!",
+    successMsg: "You've successfully subscribed to the business!",
   });
   const [unsubscribe, { isLoading: isUnsubsribeLoading, error: unsubError }] = useUnsubscribeMutation();
   const { handler: unsubscribeHandler } = useRequestHandler<number>({
     f: unsubscribe,
-    successMsg: "You've successfully unsubscribed from the company!",
+    successMsg: "You've successfully unsubscribed from the business!",
   });
 
   const { toast } = useCustomToast();
