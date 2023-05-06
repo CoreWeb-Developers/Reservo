@@ -126,7 +126,7 @@ const CompanyInfo = ({ company, setEdit }: IProps) => {
             </Button>
             <StripeButtons company={company} />
             <ConfirmPopover
-              header="Are you sure you want to delete the company? Its events will be deleted too."
+              header="Are you sure you want to delete the business? Its events and services will be deleted too."
               trigger={
                 <Button onClick={onOpenDelete} leftIcon={<DeleteIcon />} colorScheme="red" isLoading={isDeleteLoading}>
                   Delete
