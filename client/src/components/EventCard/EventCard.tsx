@@ -16,7 +16,7 @@ type Props = {
 
 const PriceFormatOptions = {
   style: 'currency',
-  currency: 'USD',
+  currency: 'KES',
 } as const;
 
 const EventCard = ({ event, isTicket = false, ...cardProps }: Props) => {
