@@ -9,7 +9,7 @@ const userCompanies = prisma.subscriptionToCompany;
 const findCompanyOrThrow = async (id: number) => {
   const exists = await company.findUnique({ where: { id } });
   if (!exists) {
-    throw new ClientError('This company does not exist', 404);
+    throw new ClientError('This business does not exist', 404);
   }
 };
 
@@ -29,7 +29,7 @@ const subscribeToCompany = async (req: Request, res: Response) => {
   await findCompanyOrThrow(companyId);
 
   if (await isCompanyConnected(companyId, userId)) {
-    throw new ClientError('You are already subscribed to this company', 400);
+    throw new ClientError('You are already subscribed to this business', 400);
   }
 
   await company.update({
@@ -51,7 +51,7 @@ const unsubscribeFromCompany = async (req: Request, res: Response) => {
   await findCompanyOrThrow(companyId);
 
   if (!(await isCompanyConnected(companyId, userId))) {
-    throw new ClientError('You are not subscribed to this company', 400);
+    throw new ClientError('You are not subscribed to this business', 400);
   }
 
   await userCompanies.delete({

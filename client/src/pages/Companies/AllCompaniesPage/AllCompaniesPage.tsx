@@ -48,7 +48,7 @@ const AllCompaniesPage = ({ heading, isYourCompanies = false, isSubscriptions = 
         <Heading color="hover">{heading}</Heading>
         {curUser.id && (
           <Button as={RouterLink} to="/companies/create" leftIcon={<AddIcon />}>
-            Create company
+            Create business
           </Button>
         )}
       </Flex>
