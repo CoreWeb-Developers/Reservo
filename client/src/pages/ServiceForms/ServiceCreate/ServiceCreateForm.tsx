@@ -56,7 +56,7 @@ const EventCreateForm = () => {
   const onSubmit = async (data: ICreate) => {
     try {
       const { id } = await create(data).unwrap();
-      toast("You've successfully created new event", 'success');
+      toast("You've successfully created new service", 'success');
       navigate(`/events/${id}`);
     } catch (error: any) {
       toast(error.data.message, 'error');
@@ -97,7 +97,7 @@ const EventCreateForm = () => {
     <Flex justify="center" align="flex-start" sx={layoutStyles.page}>
       <Card sx={styles.card} variant="outline">
         <CardHeader>
-          <Heading sx={styles.heading}>Create new event</Heading>
+          <Heading sx={styles.heading}>Create new service</Heading>
         </CardHeader>
 
         <CardBody>

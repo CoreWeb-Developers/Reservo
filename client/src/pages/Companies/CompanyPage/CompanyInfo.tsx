@@ -121,6 +121,9 @@ const CompanyInfo = ({ company, setEdit }: IProps) => {
             <Button as={RouterLink} to="/events/create" leftIcon={<AddIcon />}>
               Create event
             </Button>
+            <Button as={RouterLink} to="/events/create" leftIcon={<AddIcon />}>
+              Create Service
+            </Button>
             <Button onClick={() => setEdit(true)} leftIcon={<EditIcon />}>
               Edit
             </Button>
