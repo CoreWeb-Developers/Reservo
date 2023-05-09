@@ -105,15 +105,15 @@ const EventCreateForm = () => {
             <VStack spacing="4">
               <FormControl isInvalid={!!errors.name} isRequired>
                 <FormLabel htmlFor="name">Name</FormLabel>
-                <Input id="name" placeholder="name" {...register('name')} />
+                <Input id="name" placeholder="name of service" {...register('name')} />
                 <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={!!errors.description} isRequired>
                 <FormLabel htmlFor="description">Description</FormLabel>
-                <Textarea id="description" placeholder="description" {...register('description')} />
+                <Textarea id="description" placeholder="description of service" {...register('description')} />
                 <FormErrorMessage>{errors.description?.message}</FormErrorMessage>
               </FormControl>
-              <FormControl>
+              {/* <FormControl>
                 <FormLabel>Free</FormLabel>
                 <Switch onChange={onFreeChange} />
               </FormControl>
@@ -129,8 +129,8 @@ const EventCreateForm = () => {
                   />
                   <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
                 </FormControl>
-              )}
-              <FormControl isInvalid={!!errors.ticketsAvailable} isRequired>
+              )} */}
+              {/* <FormControl isInvalid={!!errors.ticketsAvailable} isRequired>
                 <FormLabel htmlFor="ticketsAvailable">Amount of tickets</FormLabel>
                 <Input
                   id="ticketsAvailable"
@@ -139,16 +139,16 @@ const EventCreateForm = () => {
                   {...register('ticketsAvailable', { valueAsNumber: true })}
                 />
                 <FormErrorMessage>{errors.ticketsAvailable?.message}</FormErrorMessage>
-              </FormControl>
+              </FormControl> */}
               <FormControl isInvalid={!!errors.isNotificationsOn}>
                 <FormLabel htmlFor="isNotificationsOn">
-                  Do you want to receive notifications about new visitors of the event?
+                  Do you want to receive notifications about new clients for the service?
                 </FormLabel>
                 <Switch id="isNotificationsOn" {...register('isNotificationsOn')} />
                 <FormErrorMessage>{errors.isNotificationsOn?.message}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={!!errors.isPublic}>
-                <FormLabel htmlFor="isPublic">Can everybody see the list of event visitors?</FormLabel>
+                <FormLabel htmlFor="isPublic">Can everybody see the client list?</FormLabel>
                 <Switch id="isPublic" {...register('isPublic')} />
                 <FormErrorMessage>{errors.isPublic?.message}</FormErrorMessage>
               </FormControl>
