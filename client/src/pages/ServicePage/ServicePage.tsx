@@ -11,10 +11,10 @@ import CompanyEventsCarousel from './Carousel/CompanyServicesCarousel';
 import SimilarEventsCarousel from './Carousel/ServicesCarousel';
 import Comments from './Comments/Comments';
 import CompanyInfo from './Info/CompanyInfo';
-import EventInfo from './Info/EventInfo';
-import EventUpdateForm from '~/pages/EventForms/EventUpdate/EventUpdateForm';
+import ServiceInfo from './Info/ServiceInfo';
+import ServiceUpdateForm from '~/pages/ServiceForms/ServiceUpdate/ServiceUpdateForm';
 
-const EventPage = () => {
+const ServicePage = () => {
   const { id } = useParams();
   const { data: event, isLoading: isLoadingEvent, error } = useGetEventQuery(Number(id));
   const [getCompany, { data: company, isLoading: isLoadingCompany }] = useLazyGetCompanyQuery();
@@ -37,10 +37,10 @@ const EventPage = () => {
   return (
     <>
       {isEdit ? (
-        <EventUpdateForm event={event} setEdit={setIsEdit} />
+        <ServiceUpdateForm event={event} setEdit={setIsEdit} />
       ) : (
         <Container pb="16">
-          <EventInfo event={event} company={company as Company} setEdit={setIsEdit}></EventInfo>
+          <ServiceInfo event={event} company={company as Company} setEdit={setIsEdit}></ServiceInfo>
           <CompanyInfo company={company as Company}></CompanyInfo>
           <Comments eventId={event.id} />
           <SimilarEventsCarousel eventId={event.id} eventFormatId={event.formatId} eventThemeId={event.themeId} />
@@ -51,4 +51,4 @@ const EventPage = () => {
   );
 };
 
-export default EventPage;
+export default ServicePage;
