@@ -20,7 +20,7 @@ import { useUpdateEventMutation } from '~/store/api/event-slice';
 import { updateSchema } from '~/validation/event';
 import type { IUpdate } from '~/validation/event';
 import type { Event } from '~/types/event';
-import EventFormPoster from './EventFormPoster';
+import EventFormPoster from './ServiceFormPoster';
 import PlacesSearch from '~/components/PlacesSearch/PlacesSearch';
 import AsyncSelectFormat from '~/components/Select/AsyncSelectFormat';
 import AsyncSelectTheme from '~/components/Select/AsyncSelectTheme';
@@ -69,7 +69,7 @@ const EventUpdateForm = ({ event, setEdit }: IProps) => {
 
   const { handler: updateHandler } = useRequestHandler<IUpdate & { id: number }>({
     f: update,
-    successMsg: "You've successfully updated the event",
+    successMsg: "You've successfully updated the service",
   });
 
   const onSubmit = async (data: IUpdate) => {
