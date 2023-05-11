@@ -1,8 +1,8 @@
 import { Flex, SimpleGrid, SlideFade } from '@chakra-ui/react';
 import { useState } from 'react';
 import { DateRange } from 'react-day-picker';
-import ServiceCard from '~/components/EventCard/EventCard';
-import ServiceCardSkeleton from '~/components/EventCard/EventCardSkeleton';
+import ServiceCard from '~/components/ServiceCard/ServiceCard';
+import ServiceCardSkeleton from '~/components/ServiceCard/ServiceCardSkeleton';
 import Pagination from '~/components/Pagination/Pagination';
 import { useGetServicesQuery } from '~/store/api/service-slice';
 import { ServicesParam } from '~/types/service';

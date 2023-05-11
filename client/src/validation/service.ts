@@ -1,5 +1,5 @@
 import z from 'zod';
-import { EVENT_NAME_LENGTH, EVENT_DESCRIPTION_LENGTH, LATITUDE, LONGITUDE } from '../consts/validation';
+import { SERVICE_NAME_LENGTH, SERVICE_DESCRIPTION_LENGTH, LATITUDE, LONGITUDE } from '../consts/validation';
 
 export const subscribeSchema = z.object({
   isVisible: z.boolean(),
@@ -8,9 +8,9 @@ export const subscribeSchema = z.object({
 
 const createSchema = z
   .object({
-    name: z.string().min(EVENT_NAME_LENGTH.min).max(EVENT_NAME_LENGTH.max),
-    description: z.string().min(EVENT_DESCRIPTION_LENGTH.min).max(EVENT_DESCRIPTION_LENGTH.max),
-    price: z.number({ invalid_type_error: 'Input prise' }).min(0),
+    name: z.string().min(SERVICE_NAME_LENGTH.min).max(SERVICE_NAME_LENGTH.max),
+    description: z.string().min(SERVICE_DESCRIPTION_LENGTH.min).max(SERVICE_DESCRIPTION_LENGTH.max),
+    price: z.number({ invalid_type_error: 'Input price' }).min(0),
     ticketsAvailable: z.number({ invalid_type_error: 'Input number of tickets' }).positive(),
     isNotificationsOn: z.boolean(),
     isPublic: z.boolean(),
@@ -23,15 +23,15 @@ const createSchema = z
     themeId: z.number().positive(),
   })
   .refine((data) => data.date >= data.publishDate, {
-    message: 'Publication date must be before the event date',
+    message: 'Publication date must be before the service date',
     path: ['publishDate'],
   });
 
 const updateSchema = z
   .object({
-    name: z.string().min(EVENT_NAME_LENGTH.min).max(EVENT_NAME_LENGTH.max),
-    description: z.string().min(EVENT_DESCRIPTION_LENGTH.min).max(EVENT_DESCRIPTION_LENGTH.max),
-    price: z.number({ invalid_type_error: 'Input prise' }).min(0),
+    name: z.string().min(SERVICE_NAME_LENGTH.min).max(SERVICE_NAME_LENGTH.max),
+    description: z.string().min(SERVICE_DESCRIPTION_LENGTH.min).max(SERVICE_DESCRIPTION_LENGTH.max),
+    price: z.number({ invalid_type_error: 'Input price' }).min(0),
     ticketsAvailable: z.number({ invalid_type_error: 'Input number of tickets' }).positive(),
     isNotificationsOn: z.boolean(),
     isPublic: z.boolean(),
@@ -43,7 +43,7 @@ const updateSchema = z
     themeId: z.number().positive(),
   })
   .refine((data) => data.date >= data.publishDate, {
-    message: 'Publication date must be before the event date',
+    message: 'Publication date must be before the service date',
     path: ['publishDate'],
   });
 

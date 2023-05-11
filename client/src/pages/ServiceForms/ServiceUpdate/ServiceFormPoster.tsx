@@ -5,15 +5,15 @@ import { AVATAR_PATH } from '~/consts/avatar';
 import useFileSubmit from '~/hooks/use-file-submit';
 import useRequestHandler from '~/hooks/use-request-handler';
 import useCustomToast from '~/hooks/use-custom-toast';
-import { useUpdateEventPosterMutation, useDeleteEventPosterMutation } from '~/store/api/event-slice';
+import { useUpdateServicePosterMutation, useDeleteServicePosterMutation } from '~/store/api/service-slice';
 import { FormValues, validate } from '~/validation/avatar';
-import type { Event } from '~/types/event';
+import type { Service } from '~/types/service';
 
 type IProps = {
-  event: Event;
+  service: Service;
 };
 
-const EventFormPoster = ({ event }: IProps) => {
+const ServiceFormPoster = ({ service }: IProps) => {
   const { toast } = useCustomToast();
 
   const {

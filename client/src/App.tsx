@@ -13,6 +13,7 @@ import CancelledPayment from './pages/Payment/Cancel';
 import SuccessfulPayment from './pages/Payment/Success';
 import CompaniesRoutes from './routes/Companies';
 import EventRoutes from './routes/Events';
+import ServiceRoutes from './routes/Services';
 import ProfileRoutes from './routes/Profile';
 
 function App() {
@@ -31,6 +32,8 @@ function App() {
           <Route path="profile/*" element={<ProfileRoutes />} />
         </Route>
         <Route path="events/*" element={<EventRoutes />} />
+        <Route>
+        <Route path="services/*" element={<ServiceRoutes />} />
         <Route>
           <Route path="companies/*" element={<CompaniesRoutes />} />
         </Route>

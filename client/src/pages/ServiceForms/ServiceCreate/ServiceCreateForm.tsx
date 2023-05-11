@@ -14,23 +14,23 @@ import {
   Switch,
 } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState, useEffect, ChangeEvent } from 'react';
+import { useState, useEffect, ChangeService } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import useCustomToast from '~/hooks/use-custom-toast';
-import { useCreateEventMutation } from '~/store/api/event-slice';
-import { createSchema } from '~/validation/event';
-import type { ICreate } from '~/validation/event';
+import { useCreateServiceMutation } from '~/store/api/service-slice';
+import { createSchema } from '~/validation/service';
+import type { ICreate } from '~/validation/service';
 import PlacesSearch from '~/components/PlacesSearch/PlacesSearch';
 import AsyncSelectCompany from '~/components/Select/AsyncSelectCompany';
 import AsyncSelectFormat from '~/components/Select/AsyncSelectFormat';
 import AsyncSelectTheme from '~/components/Select/AsyncSelectTheme';
 import { SelectOptionData } from '~/types/select-option-data';
-import styles from '../event-form.styles';
+import styles from '../services-form.styles';
 import layoutStyles from '~/components/Layout/layout.styles';
 
-const EventCreateForm = () => {
-  const [create, { isLoading }] = useCreateEventMutation();
+const ServiceCreateForm = () => {
+  const [create, { isLoading }] = useCreateServiceMutation();
   const navigate = useNavigate();
   const { toast } = useCustomToast();
 
@@ -57,18 +57,18 @@ const EventCreateForm = () => {
     try {
       const { id } = await create(data).unwrap();
       toast("You've successfully created new service", 'success');
-      navigate(`/events/${id}`);
+      navigate(`/services/${id}`);
     } catch (error: any) {
       toast(error.data.message, 'error');
     }
   };
 
-  const onFreeChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onFreeChange = (e: ChangeService<HTMLInputElement>) => {
     setIsFree(e.target.checked);
     setValue('price', 0, { shouldValidate: true });
   };
 
-  const onPublishNowChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onPublishNowChange = (e: ChangeService<HTMLInputElement>) => {
     setIsPublishNow(e.target.checked);
     reset({
       publishDate: new Date(),
@@ -113,7 +113,7 @@ const EventCreateForm = () => {
                 <Textarea id="description" placeholder="description of service" {...register('description')} />
                 <FormErrorMessage>{errors.description?.message}</FormErrorMessage>
               </FormControl>
-              {/* <FormControl>
+              <FormControl>
                 <FormLabel>Free</FormLabel>
                 <Switch onChange={onFreeChange} />
               </FormControl>
@@ -129,8 +129,8 @@ const EventCreateForm = () => {
                   />
                   <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
                 </FormControl>
-              )} */}
-              {/* <FormControl isInvalid={!!errors.ticketsAvailable} isRequired>
+              )}
+              <FormControl isInvalid={!!errors.ticketsAvailable} isRequired>
                 <FormLabel htmlFor="ticketsAvailable">Amount of tickets</FormLabel>
                 <Input
                   id="ticketsAvailable"
@@ -139,7 +139,7 @@ const EventCreateForm = () => {
                   {...register('ticketsAvailable', { valueAsNumber: true })}
                 />
                 <FormErrorMessage>{errors.ticketsAvailable?.message}</FormErrorMessage>
-              </FormControl> */}
+              </FormControl>
               <FormControl isInvalid={!!errors.isNotificationsOn}>
                 <FormLabel htmlFor="isNotificationsOn">
                   Do you want to receive notifications about new clients for the service?
@@ -207,4 +207,4 @@ const EventCreateForm = () => {
   );
 };
 
-export default EventCreateForm;
+export default ServiceCreateForm;

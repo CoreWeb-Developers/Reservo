@@ -1,87 +1,87 @@
-import { SubscriptionResponse, Event, EventsParam, EventsResponse } from '~/types/service';
+import { SubscriptionResponse, Service, ServicesParam, ServicesResponse } from '~/types/service';
 import type { ISubscribe, ICreate, IUpdate } from '~/validation/service';
 import { apiSlice } from './api-slice';
 
 export const extendedApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getEvents: builder.query<EventsResponse, EventsParam>({
+    getServices: builder.query<ServicesResponse, ServicesParam>({
       query: (queryParams) => ({
-        url: `/events`,
+        url: `/services`,
         params: { ...queryParams },
       }),
-      transformResponse(events: Event[], meta: any) {
-        return { events, totalCount: Number(meta.response.headers.get('X-Total-Count')) };
+      transformResponse(services: Service[], meta: any) {
+        return { services, totalCount: Number(meta.response.headers.get('X-Total-Count')) };
       },
       providesTags: (result) => {
-        const events = result?.events || [];
-        return ['Event', ...events.map(({ id }) => ({ type: 'Event' as const, id }))];
+        const services = result?.services || [];
+        return ['Service', ...services.map(({ id }) => ({ type: 'Service' as const, id }))];
       },
     }),
     getEvent: builder.query<Event, number>({
-      query: (id) => `/events/${id}`,
-      providesTags: (_result, _error, arg) => [{ type: 'Event' as const, id: arg }],
+      query: (id) => `/services/${id}`,
+      providesTags: (_result, _error, arg) => [{ type: 'Service' as const, id: arg }],
     }),
-    createEvent: builder.mutation<Event, ICreate>({
+    createEvent: builder.mutation<Service, ICreate>({
       query: (body) => ({
-        url: '/events',
+        url: '/services',
         method: 'POST',
         body,
       }),
-      invalidatesTags: ['Event'],
+      invalidatesTags: ['Service'],
     }),
-    updateEvent: builder.mutation<Event, IUpdate & Pick<Event, 'id'>>({
+    updateEvent: builder.mutation<Service, IUpdate & Pick<Service, 'id'>>({
       query: ({ id, ...body }) => ({
-        url: `/events/${id}`,
+        url: `/services/${id}`,
         method: 'PUT',
         body,
       }),
-      invalidatesTags: (_result, _error, arg) => [{ type: 'Event', id: arg.id }],
+      invalidatesTags: (_result, _error, arg) => [{ type: 'Service', id: arg.id }],
     }),
-    deleteEvent: builder.mutation<Event, number>({
+    deleteService: builder.mutation<Service, number>({
       query: (id) => ({
-        url: `/events/${id}`,
+        url: `/services/${id}`,
         method: 'DELETE',
         body: {},
       }),
-      invalidatesTags: ['Event'],
+      invalidatesTags: ['Service'],
     }),
-    updateEventPoster: builder.mutation<Event, { form: FormData } & Pick<Event, 'id'>>({
+    updateServicePoster: builder.mutation<Service, { form: FormData } & Pick<Service, 'id'>>({
       query: ({ id, form }) => ({
-        url: `/events/${id}/poster`,
+        url: `/services/${id}/poster`,
         method: 'PUT',
         body: form,
       }),
-      invalidatesTags: (_result, _error, arg) => [{ type: 'Event', id: arg.id }],
+      invalidatesTags: (_result, _error, arg) => [{ type: 'Service', id: arg.id }],
     }),
-    deleteEventPoster: builder.mutation<void, number>({
+    deleteServicePoster: builder.mutation<void, number>({
       query: (id) => ({
-        url: `/events/${id}/poster`,
+        url: `/services/${id}/poster`,
         method: 'DELETE',
       }),
-      invalidatesTags: (_result, _error, arg) => [{ type: 'Event', id: arg }],
+      invalidatesTags: (_result, _error, arg) => [{ type: 'Service', id: arg }],
     }),
-    checkoutForEvent: builder.mutation<SubscriptionResponse, ISubscribe & { id: number }>({
+    checkoutForService: builder.mutation<SubscriptionResponse, ISubscribe & { id: number }>({
       query: ({ isVisible, promoCode, id }) => ({
-        url: `/events/${id}/subscribe`,
+        url: `/services/${id}/subscribe`,
         method: 'POST',
         body: { isVisible, promoCode },
       }),
       invalidatesTags: (_result, _error, arg) => [
-        'Event',
-        { type: 'Event' as const, id: arg.id },
-        { type: 'EventSubscribers' as const, id: arg.id },
+        'Service',
+        { type: 'Service' as const, id: arg.id },
+        { type: 'ServiceSubscribers' as const, id: arg.id },
       ],
     }),
   }),
 });
 
 export const {
-  useGetEventQuery,
-  useGetEventsQuery,
-  useCreateEventMutation,
-  useUpdateEventMutation,
-  useDeleteEventMutation,
-  useUpdateEventPosterMutation,
-  useDeleteEventPosterMutation,
-  useCheckoutForEventMutation,
+  useGetServiceQuery,
+  useGetServiceQuery,
+  useCreateServiceMutation,
+  useUpdateServiceMutation,
+  useDeleteServiceMutation,
+  useUpdateServicePosterMutation,
+  useDeleteServicePosterMutation,
+  useCheckoutForServiceMutation,
 } = extendedApiSlice;
