@@ -11,6 +11,10 @@ const templates = {
     subject: 'A new event that might be interesting to you',
     file: 'event-published.pug',
   },
+  SERVICE_PUBLISHED: {
+    subject: 'A new service that might be interesting to you',
+    file: 'event-published.pug',
+  },
   NEW_EVENT_VISITOR: {
     subject: 'A new user has subscribed to your event',
     file: 'new-visitor-notification.pug',
