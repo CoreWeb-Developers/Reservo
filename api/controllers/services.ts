@@ -24,9 +24,9 @@ const createService = async (req: Request, res: Response) => {
   }
 
   await Promise.all([
-    ServiceService.checkUniqueEventName(data.name),
-    ServiceService.checkEventFormatExists(data.formatId),
-    ServiceService.checkEventThemeExists(data.themeId),
+    ServiceService.checkUniqueServiceName(data.name),
+    ServiceService.checkServiceFormatExists(data.formatId),
+    ServiceService.checkServiceThemeExists(data.themeId),
   ]);
 
   const newService = await service.create({
@@ -43,7 +43,7 @@ const createService = async (req: Request, res: Response) => {
 const getOneServiceById = async (req: Request, res: Response) => {
   const serviceId: number = Number(req.params.id);
 
-  const service = await ServiceService.findEventIfExists(serviceId);
+  const service = await ServiceService.findServiceIfExists(serviceId);
 
   res.status(200).json(service);
 };
@@ -78,11 +78,11 @@ const updateService = async (req: Request, res: Response) => {
   const { publishDate, date } = data;
   const serviceId = Number(req.params.id);
 
-  const [oldEvent] = await Promise.all([
+  const [oldService] = await Promise.all([
     ServiceService.findServiceIfExists(serviceId),
-    ServiceService.checkUniqueEventName(data.name, serviceId),
-    ServiceService.checkEventFormatExists(data.formatId),
-    ServiceService.checkEventThemeExists(data.themeId),
+    ServiceService.checkUniqueServiceName(data.name, serviceId),
+    ServiceService.checkServiceFormatExists(data.formatId),
+    ServiceService.checkServiceThemeExists(data.themeId),
   ]);
 
   const updatedService = await service.update({
@@ -91,12 +91,12 @@ const updateService = async (req: Request, res: Response) => {
     include: { format: true, theme: true },
   });
 
-  if (compareDates(new Date(publishDate), oldEvent.publishDate)) {
+  if (compareDates(new Date(publishDate), oldService.publishDate)) {
     scheduleCompanySubscribersNotification(new Date(publishDate), serviceId);
   }
 
   if (compareDates(new Date(date), oldService.date)) {
-    scheduleEventReminder(subtractHours(date, HOURS_BEFORE_EVENT), eventId);
+    scheduleEventReminder(subtractHours(date, HOURS_BEFORE_EVENT), serviceId);
   }
 
   res.json(updatedService);

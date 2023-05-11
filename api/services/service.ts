@@ -80,7 +80,7 @@ const EventService = {
     }
   },
 
-  async checkEventFormatExists(formatId: number) {
+  async checkServiceFormatExists(formatId: number) {
     try {
       await serviceFormat.findUniqueOrThrow({ where: { id: formatId } });
     } catch (_e) {
@@ -88,7 +88,7 @@ const EventService = {
     }
   },
 
-  async checkEventThemeExists(themeId: number) {
+  async checkServiceThemeExists(themeId: number) {
     try {
       await eventTheme.findUniqueOrThrow({ where: { id: themeId } });
     } catch (_e) {
@@ -96,7 +96,7 @@ const EventService = {
     }
   },
 
-  getEventsSortOptions(params: QueryParams, defaultSort: string): any {
+  getServicesSortOptions(params: QueryParams, defaultSort: string): any {
     const { _sort, _order } = params;
     const relationProperties: string[] = ['theme', 'format'];
 
@@ -117,7 +117,7 @@ const EventService = {
     return getSortOptions(params, defaultSort);
   },
 
-  getEventsWhereOptions(queryParams: FilterAttributes) {
+  getServicesWhereOptions(queryParams: FilterAttributes) {
     const where: Prisma.EventWhereInput = {};
     const {
       userId,
