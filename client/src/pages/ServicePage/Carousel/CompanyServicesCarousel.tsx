@@ -1,17 +1,17 @@
 import { Box, Heading } from '@chakra-ui/react';
-import { useGetEventsQuery } from '~/store/api/event-slice';
-import { Event, EventsParam } from '~/types/event';
-import styles from '../event.styles';
+import { useGetServicesQuery } from '~/store/api/service-slice';
+import { Service, ServicesParam } from '~/types/service';
+import styles from '../service.styles';
 import Carousel from './Carousel';
 import CarouselNothingFound from './CarouselNothingFound';
 
 type Props = {
-  eventId: number;
+  serviceId: number;
   companyId: number;
 };
 
-const CompanyEventsCarousel = ({ eventId, companyId }: Props) => {
-  const params: EventsParam = {
+const CompanyServicesCarousel = ({ serviceId, companyId }: Props) => {
+  const params: ServicesParam = {
     _sort: 'date',
     _order: 'ASC' as const,
     _start: 0,
@@ -20,9 +20,9 @@ const CompanyEventsCarousel = ({ eventId, companyId }: Props) => {
     companyId,
   };
 
-  const { data, isFetching, isSuccess } = useGetEventsQuery(params);
+  const { data, isFetching, isSuccess } = useGetServicesQuery(params);
 
-  let events: Event[] | null = null;
+  let services: Service[] | null = null;
 
   if (isSuccess) {
     events = data.events.filter((e) => e.id !== eventId);
@@ -31,11 +31,11 @@ const CompanyEventsCarousel = ({ eventId, companyId }: Props) => {
   return (
     <Box py="40px" sx={{ ...styles.mainInfo, mx: !eventId ? 'auto' : 0 }}>
       <Heading as="h3" fontSize="24px">
-        Other company's events
+        Other company's services
       </Heading>
-      {!events?.length && !isFetching ? <CarouselNothingFound /> : <Carousel isFetching={isFetching} events={events} />}
+      {!events?.length && !isFetching ? <CarouselNothingFound /> : <Carousel isFetching={isFetching} services={services} />}
     </Box>
   );
 };
 
-export default CompanyEventsCarousel;
+export default CompanyServicesCarousel;
