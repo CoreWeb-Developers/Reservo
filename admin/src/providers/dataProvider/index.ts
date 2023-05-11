@@ -2,6 +2,7 @@ import jsonServerProvider from 'ra-data-json-server';
 import { withLifecycleCallbacks } from 'react-admin';
 import companiesLifecycle from './companiesLifecycle';
 import eventsLifecycle from './eventsLifecycle';
+import servicesLifecycle from './servicesLifecycle';
 import { formatsLifecycle, themesLifecycle } from './formatThemeLifecycle';
 import commentsLifecycle from './commentsLifecycle';
 import usersLifecycle from './usersLifecycle';
@@ -13,6 +14,7 @@ const baseDataProvider = jsonServerProvider(import.meta.env.VITE_SERVER_URL, htt
 const dataProvider = withLifecycleCallbacks(baseDataProvider, [
   companiesLifecycle,
   eventsLifecycle,
+  servicesLifecycle,
   formatsLifecycle,
   themesLifecycle,
   commentsLifecycle,
