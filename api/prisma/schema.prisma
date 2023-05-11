@@ -37,6 +37,18 @@ model UserEvent {
   @@map("user_event")
 }
 
+model UserService {
+  userId    Int     @map("user_id")
+  serviceId   Int     @map("event_id")
+  isVisible Boolean @default(true) @map("is_visible")
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  service Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  @@id([userId, serviceId])
+  @@map("user_service")
+}
+
 model SubscriptionToCompany {
   userId    Int @map("user_id")
   companyId Int @map("company_id")
@@ -61,6 +73,7 @@ model Company {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   events      Event[]
+  services    Service[]
   subscribers SubscriptionToCompany[]
 
   @@map("company")
@@ -72,9 +85,11 @@ model Comment {
   publishDate DateTime @default(now()) @map("publish_date") @db.Timestamp(1)
   userId      Int      @map("user_id")
   eventId     Int      @map("event_id")
+  serviceId   Int      @map("service_id")
 
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  service Service @relation(fields: [serviceId], references: [id], on: Cascade)
 
   @@map("comment")
 }
@@ -123,12 +138,57 @@ model EventTheme {
   @@map("event_theme")
 }
 
+model ServiceModel {
+  id                Int      @id @default(autoincrement())
+  name              String   @unique @db.VarChar(255)
+  description       String   @db.Text
+  date              DateTime @db.Timestamp() //? not sure about type
+  price             Decimal  @db.Decimal(7, 2) // if price == 0 ticket is free
+  latitude          Decimal  @db.Decimal(7, 5)
+  longitude         Decimal  @db.Decimal(8, 5)
+  ticketsAvailable  Int      @map("tickets_available") //? can it be unlimmited
+  picturePath       String?  @map("picture_path") @db.VarChar(255)
+  isNotificationsOn Boolean  @default(false) @map("is_notifications_on") // notify owner about new visitor
+  isPublic          Boolean  @default(true) @map("is_public") // who can see list of visitors everybody or only users who are going to the event
+  publishDate       DateTime @default(now()) @map("publish_date") @db.Timestamp(1)
+  companyId         Int      @map("company_id")
+  formatId          Int      @map("format_id")
+  themeId           Int      @map("theme_id")
+
+  company Company     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  format  ServiceFormat @relation(fields: [formatId], references: [id], onDelete: Restrict)
+  theme   ServiceTheme  @relation(fields: [themeId], references: [id], onDelete: Restrict)
+
+  comments   Comment[]
+  promoCodes PromoCode[]
+  visitors   UserService[]
+
+  @@map("service")
+}
+
+model ServiceFormat {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique @db.VarChar(255)
+  services Service[]
+
+  @@map("service_format")
+}
+
+model ServiceTheme {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique @db.VarChar(255)
+  services Service[]
+
+  @@map("service_theme")
+}
+
 model PromoCode {
   id        Int    @id @default(autoincrement())
   promoCode String @map("promo_code") @db.VarChar(255)
   discount  Int
   eventId   Int    @map("event_id")
   event     Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  service   Service @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
   @@map("promo_code")
 }

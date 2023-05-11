@@ -1,5 +1,5 @@
 paths:
-  /events:
+  /services:
     get:
       tags:
         - Services
@@ -37,22 +37,22 @@ paths:
           in: query
           schema:
             type: integer
-          description: The id of the events' owner
+          description: The id of the services' owner
         - name: formatId
           in: query
           schema:
             type: integer
-          description: The id of the events' format
+          description: The id of the services' format
         - name: themeId
           in: query
           schema:
             type: integer
-          description: The id of the events' theme
+          description: The id of the services' theme
         - name: userId
           in: query
           schema:
             type: integer
-          description: The id of the events' visitor
+          description: The id of the services' visitor
         - name: upcoming
           in: query
           schema:
@@ -80,7 +80,7 @@ paths:
           description: The string for general search by name
       responses:
         200:
-          description: All events found
+          description: All services found
           headers:
             X-Total-Count:
               schema:
@@ -89,7 +89,7 @@ paths:
           content:
             application/json; charset=utf-8:
               schema:
-                $ref: '#definitions/events'
+                $ref: '#definitions/services'
         400:
           description: The format of the data is invalid
           content:
@@ -98,22 +98,22 @@ paths:
                 $ref: '#definitions/error'
     post:
       tags:
-        - Events
+        - services
       security:
         - bearerAuth: []
-      description: Create an event
+      description: Create an service
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#definitions/event_create'
+              $ref: '#definitions/service_create'
       responses:
         201:
-          description: Event was created
+          description: service was created
           content:
             application/json; charset=utf-8:
               schema:
-                $ref: '#definitions/event'
+                $ref: '#definitions/service'
         400:
           description: The format of the data is invalid
           content:
@@ -132,7 +132,7 @@ paths:
             application/json; charset=utf-8:
               schema:
                 $ref: '#definitions/error'
-  /events/{id}:
+  /services/{id}:
     parameters:
       - name: id
         in: path
@@ -142,39 +142,39 @@ paths:
         description: The id of the record to query
     get:
       tags:
-        - Events
-      description: Get the event by id
+        - services
+      description: Get the service by id
       responses:
         200:
-          description: Found the event by id
+          description: Found the service by id
           content:
             application/json; charset=utf-8:
               schema:
-                $ref: '#definitions/event'
+                $ref: '#definitions/service'
         404:
-          description: The event was not found by id
+          description: The service was not found by id
           content:
             application/json; charset=utf-8:
               schema:
                 $ref: '#definitions/error'
     put:
       tags:
-        - Events
+        - services
       security:
         - bearerAuth: []
-      description: Update the event by id
+      description: Update the service by id
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#definitions/event_update'
+              $ref: '#definitions/service_update'
       responses:
         201:
-          description: Event was updated
+          description: Service was updated
           content:
             application/json; charset=utf-8:
               schema:
-                $ref: '#definitions/event'
+                $ref: '#definitions/service'
         400:
           description: The format of the data is invalid
           content:
@@ -194,24 +194,24 @@ paths:
               schema:
                 $ref: '#definitions/error'
         404:
-          description: The event was not found by id
+          description: The service was not found by id
           content:
             application/json; charset=utf-8:
               schema:
                 $ref: '#definitions/error'
     delete:
       tags:
-        - Events
+        - services
       security:
         - bearerAuth: []
-      description: Remove the event by id
+      description: Remove the service by id
       responses:
         200:
-          description: Event was removed
+          description: service was removed
           content:
             application/json; charset=utf-8:
               schema:
-                $ref: '#definitions/event'
+                $ref: '#definitions/service'
         401:
           description: Bearer token is invalid
           content:
@@ -225,12 +225,12 @@ paths:
               schema:
                 $ref: '#definitions/error'
         404:
-          description: The event was not found by id
+          description: The service was not found by id
           content:
             application/json; charset=utf-8:
               schema:
                 $ref: '#definitions/error'
-  /events/{id}/poster:
+  /services/{id}/poster:
     parameters:
       - name: id
         in: path
@@ -240,10 +240,10 @@ paths:
         description: The id of the record to query
     put:
       tags:
-        - Events
+        - services
       security:
         - bearerAuth: []
-      description: Update the event's poster by id
+      description: Update the service's poster by id
       parameters:
         - in: formData
           name: poster
@@ -252,11 +252,11 @@ paths:
           description: The file to upload.
       responses:
         201:
-          description: The event's poster was updated
+          description: The service's poster was updated
           content:
             application/json; charset=utf-8:
               schema:
-                $ref: '#definitions/event'
+                $ref: '#definitions/service'
         400:
           description: The format of the file is invalid
           content:
@@ -276,24 +276,24 @@ paths:
               schema:
                 $ref: '#definitions/error'
         404:
-          description: The event was not found by id
+          description: The service was not found by id
           content:
             application/json; charset=utf-8:
               schema:
                 $ref: '#definitions/error'
     delete:
       tags:
-        - Events
+        - services
       security:
         - bearerAuth: []
-      description: Remove the event's poster by id
+      description: Remove the service's poster by id
       responses:
         200:
-          description: The event's poster was removed
+          description: The service's poster was removed
           content:
             application/json; charset=utf-8:
               schema:
-                $ref: '#definitions/event'
+                $ref: '#definitions/service'
         401:
           description: Bearer token is invalid
           content:
@@ -307,12 +307,12 @@ paths:
               schema:
                 $ref: '#definitions/error'
         404:
-          description: The event was not found by id
+          description: The service was not found by id
           content:
             application/json; charset=utf-8:
               schema:
                 $ref: '#definitions/error'
-  /events/{id}/subscribe:
+  /services/{id}/subscribe:
     parameters:
       - name: id
         in: path
@@ -322,7 +322,7 @@ paths:
         description: The id of the record to query
     post:
       tags:
-        - Events
+        - services
       security:
         - bearerAuth: []
       description: Initiate a Stripe session for a payment
@@ -330,10 +330,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#definitions/event_checkout'
+              $ref: '#definitions/service_checkout'
       responses:
         200:
-          description: Created a Stripe session OR Subscribed to a free event
+          description: Created a Stripe session OR Subscribed to a free service
           content:
             application/json; charset=utf-8:
               schema:
@@ -342,7 +342,7 @@ paths:
                   sessionId:
                     type: integer
         400:
-          description: You're already subscribed to the event
+          description: You're already subscribed to the service
           content:
             application/json; charset=utf-8:
               schema:
