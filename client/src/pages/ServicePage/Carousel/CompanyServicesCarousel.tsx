@@ -25,15 +25,15 @@ const CompanyServicesCarousel = ({ serviceId, companyId }: Props) => {
   let services: Service[] | null = null;
 
   if (isSuccess) {
-    events = data.events.filter((e) => e.id !== eventId);
+    services = data.services.filter((e) => e.id !== serviceId);
   }
 
   return (
-    <Box py="40px" sx={{ ...styles.mainInfo, mx: !eventId ? 'auto' : 0 }}>
+    <Box py="40px" sx={{ ...styles.mainInfo, mx: !serviceId ? 'auto' : 0 }}>
       <Heading as="h3" fontSize="24px">
         Other company's services
       </Heading>
-      {!events?.length && !isFetching ? <CarouselNothingFound /> : <Carousel isFetching={isFetching} services={services} />}
+      {!services?.length && !isFetching ? <CarouselNothingFound /> : <Carousel isFetching={isFetching} services={services} />}
     </Box>
   );
 };
