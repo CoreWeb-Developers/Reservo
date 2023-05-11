@@ -1,11 +1,11 @@
 import { Flex, SimpleGrid, SlideFade } from '@chakra-ui/react';
 import { useState } from 'react';
 import { DateRange } from 'react-day-picker';
-import EventCard from '~/components/EventCard/EventCard';
-import EventCardSkeleton from '~/components/EventCard/EventCardSkeleton';
+import ServiceCard from '~/components/EventCard/EventCard';
+import ServiceCardSkeleton from '~/components/EventCard/EventCardSkeleton';
 import Pagination from '~/components/Pagination/Pagination';
-import { useGetEventsQuery } from '~/store/api/event-slice';
-import { EventsParam } from '~/types/event';
+import { useGetServicesQuery } from '~/store/api/service-slice';
+import { ServicesParam } from '~/types/service';
 import NothingFound from './NothingFound';
 
 type Props = {
@@ -19,7 +19,7 @@ type Props = {
   notPublished?: boolean;
 };
 
-const EventList = ({
+const ServiceList = ({
   formatId,
   themeId,
   userId,
@@ -31,7 +31,7 @@ const EventList = ({
 }: Props) => {
   const [curPage, setCurPage] = useState(1);
 
-  const params: EventsParam = {
+  const params: ServicesParam = {
     _sort: 'date',
     _order: 'ASC' as const,
     _start: (curPage - 1) * itemsPerPage,
@@ -49,7 +49,7 @@ const EventList = ({
     params.dateTo = dateRange.to.toISOString();
   }
 
-  const { data, isFetching } = useGetEventsQuery(params);
+  const { data, isFetching } = useGetServicesQuery(params);
 
   return (
     <>
@@ -59,13 +59,13 @@ const EventList = ({
             {Array(itemsPerPage)
               .fill('')
               .map((_, i) => (
-                <EventCardSkeleton key={i} />
+                <ServiceCardSkeleton key={i} />
               ))}
           </>
         ) : data?.events.length ? (
           data?.events.map((event) => (
             <SlideFade key={event.id} offsetY="30px" in={true}>
-              <EventCard isTicket={!!userId} event={event} h="100%" />
+              <ServiceCard isTicket={!!userId} event={event} h="100%" />
             </SlideFade>
           ))
         ) : (
@@ -87,4 +87,4 @@ const EventList = ({
   );
 };
 
-export default EventList;
+export default ServiceList;

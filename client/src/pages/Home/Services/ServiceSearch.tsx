@@ -10,10 +10,10 @@ type IProps = {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const EventSearch = ({ setSearch }: IProps) => {
+const ServiceSearch = ({ setSearch }: IProps) => {
   const { register } = useForm<ISearch>();
 
-  const onChange = (e: React.FormEvent<HTMLInputElement>) => {
+  const onChange = (e: React.FormService<HTMLInputElement>) => {
     setSearch(e.currentTarget.value);
   };
 
@@ -27,7 +27,7 @@ const EventSearch = ({ setSearch }: IProps) => {
           sx={{ w: '400px', h: '40px' }}
           id="q"
           type="q"
-          placeholder="Type the name of the event"
+          placeholder="Type the name of the service"
           {...register('q', {
             onChange,
           })}
@@ -37,4 +37,4 @@ const EventSearch = ({ setSearch }: IProps) => {
   );
 };
 
-export default EventSearch;
+export default ServiceSearch;

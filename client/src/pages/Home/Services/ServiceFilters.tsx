@@ -4,7 +4,7 @@ import 'react-day-picker/dist/style.css';
 import AsyncSelectFormat from '~/components/Select/AsyncSelectFormat';
 import AsyncSelectTheme from '~/components/Select/AsyncSelectTheme';
 import { SelectOptionData } from '~/types/select-option-data';
-import EventDatesMenu from './ServiceDatesMenu';
+import ServiceDatesMenu from './ServiceDatesMenu';
 
 type Props = {
   format: SelectOptionData | null;
@@ -26,7 +26,7 @@ const EventFilters = ({ format, theme, setFormat, setTheme, dateRange, setDateRa
         <InputLeftAddon>Theme</InputLeftAddon>
         <AsyncSelectTheme theme={theme} setTheme={setTheme} />
       </InputGroup>
-      <EventDatesMenu dateRange={dateRange} setDateRange={setDateRange} />
+      <ServiceDatesMenu dateRange={dateRange} setDateRange={setDateRange} />
     </Stack>
   );
 };

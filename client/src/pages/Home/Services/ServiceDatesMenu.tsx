@@ -24,7 +24,7 @@ type Props = {
   setDateRange: (val: DateRange | null) => void;
 };
 
-const EventDatesMenu = ({ dateRange, setDateRange }: Props) => {
+const ServiceDatesMenu = ({ dateRange, setDateRange }: Props) => {
   const optionLabels = {
     allDates: 'All Dates',
     today: 'Today',
@@ -136,4 +136,4 @@ const EventDatesMenu = ({ dateRange, setDateRange }: Props) => {
   );
 };
 
-export default EventDatesMenu;
+export default ServiceDatesMenu;

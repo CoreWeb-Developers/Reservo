@@ -4,13 +4,13 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import EventCard from '~/components/EventCard/EventCard';
-import EventCardSkeleton from '~/components/EventCard/EventCardSkeleton';
-import { Event } from '~/types/event';
+import ServiceCard from '~/components/ServiceCard/ServiceCard';
+import ServiceCardSkeleton from '~/components/ServiceCard/ServiceCardSkeleton';
+import { Service } from '~/types/service';
 
 type Props = {
   isFetching: boolean;
-  events: Event[] | null;
+  events: Service[] | null;
 };
 
 const Carousel = ({ isFetching, events }: Props) => {
@@ -19,20 +19,20 @@ const Carousel = ({ isFetching, events }: Props) => {
     content = (
       <>
         <SwiperSlide>
-          <EventCardSkeleton />
+          <ServiceCardSkeleton />
         </SwiperSlide>
         <SwiperSlide>
-          <EventCardSkeleton />
+          <ServiceCardSkeleton />
         </SwiperSlide>
         <SwiperSlide>
-          <EventCardSkeleton />
+          <ServiceCardSkeleton />
         </SwiperSlide>
       </>
     );
   } else if (events) {
     content = events.map((e) => (
       <SwiperSlide key={e.id}>
-        <EventCard event={e} />
+        <ServiceCard event={e} />
       </SwiperSlide>
     ));
   }
