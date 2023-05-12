@@ -49,7 +49,7 @@ const ServiceList = ({
     params.dateTo = dateRange.to.toISOString();
   }
 
-  const { data, isFetching } = useGetServicesQuery(params);
+  const { data, isFetching } = useGetServiceQuery(params);
 
   return (
     <>
@@ -62,10 +62,10 @@ const ServiceList = ({
                 <ServiceCardSkeleton key={i} />
               ))}
           </>
-        ) : data?.events.length ? (
-          data?.events.map((event) => (
-            <SlideFade key={event.id} offsetY="30px" in={true}>
-              <ServiceCard isTicket={!!userId} event={event} h="100%" />
+        ) : data?.services.length ? (
+          data?.services.map((service) => (
+            <SlideFade key={service.id} offsetY="30px" in={true}>
+              <ServiceCard isTicket={!!userId} service={service} h="100%" />
             </SlideFade>
           ))
         ) : (
@@ -75,7 +75,7 @@ const ServiceList = ({
         )}
       </SimpleGrid>
       <Flex w="100%" alignItems="center" justifyContent="center" pb="40px">
-        {data?.events.length ? (
+        {data?.services.length ? (
           <Pagination
             numberOfPages={Math.ceil((data?.totalCount as number) / itemsPerPage)}
             curPage={curPage}

@@ -17,11 +17,11 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         return ['Service', ...services.map(({ id }) => ({ type: 'Service' as const, id }))];
       },
     }),
-    getEvent: builder.query<Event, number>({
+    getService: builder.query<Service, number>({
       query: (id) => `/services/${id}`,
       providesTags: (_result, _error, arg) => [{ type: 'Service' as const, id: arg }],
     }),
-    createEvent: builder.mutation<Service, ICreate>({
+    createService: builder.mutation<Service, ICreate>({
       query: (body) => ({
         url: '/services',
         method: 'POST',
@@ -29,7 +29,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ['Service'],
     }),
-    updateEvent: builder.mutation<Service, IUpdate & Pick<Service, 'id'>>({
+    updateService: builder.mutation<Service, IUpdate & Pick<Service, 'id'>>({
       query: ({ id, ...body }) => ({
         url: `/services/${id}`,
         method: 'PUT',
@@ -77,7 +77,7 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
 
 export const {
   useGetServiceQuery,
-  useGetServiceQuery,
+  useGetServicesQuery,
   useCreateServiceMutation,
   useUpdateServiceMutation,
   useDeleteServiceMutation,
