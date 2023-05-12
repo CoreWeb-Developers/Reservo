@@ -1,4 +1,4 @@
-import { Event } from '~/types/event';
+import { Service } from '~/types/service';
 import { AVATAR_PATH } from './avatar';
 
 export const STRIPE_API_KEY = import.meta.env.VITE_STRIPE_API_KEY;
@@ -21,7 +21,7 @@ export const DateFormatOptions = {
   minute: '2-digit',
 } as const;
 
-export const GET_DISPLAY_EVENT = (e: Event) => {
+export const GET_DISPLAY_SERVICE = (e: Service) => {
   const initialDate = new Date(e.date);
   const date = new Intl.DateTimeFormat('en-US', DateFormatOptions).format(initialDate);
   const tickets = e.ticketsAvailable;
@@ -36,4 +36,4 @@ export const GET_DISPLAY_EVENT = (e: Event) => {
   };
 };
 
-export const FALLBACK_POSTER = '/assets/event-poster.png';
+export const FALLBACK_POSTER = '/assets/service-poster.png';
