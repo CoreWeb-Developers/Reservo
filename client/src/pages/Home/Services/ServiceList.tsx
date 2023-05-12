@@ -49,7 +49,7 @@ const ServiceList = ({
     params.dateTo = dateRange.to.toISOString();
   }
 
-  const { data, isFetching } = useGetServiceQuery(params);
+  const { data, isFetching } = useGetServicesQuery(params);
 
   return (
     <>

@@ -5,7 +5,7 @@ import { SelectOptionData } from '~/types/select-option-data';
 import Container from '~/components/Container';
 import { DateRange } from 'react-day-picker';
 
-const Events = () => {
+const Services = () => {
   const [format, setFormat] = useState<SelectOptionData | null>(null);
   const [theme, setTheme] = useState<SelectOptionData | null>(null);
   const [dateRange, setDateRange] = useState<DateRange | null>(null);
@@ -25,4 +25,4 @@ const Events = () => {
   );
 };
 
-export default Events;
+export default Services;
