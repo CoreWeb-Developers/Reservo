@@ -10,10 +10,10 @@ import { Service } from '~/types/service';
 
 type Props = {
   isFetching: boolean;
-  events: Service[] | null;
+  services: Service[] | null;
 };
 
-const Carousel = ({ isFetching, events }: Props) => {
+const Carousel = ({ isFetching, services }: Props) => {
   let content: ReactNode;
   if (isFetching) {
     content = (
@@ -29,10 +29,10 @@ const Carousel = ({ isFetching, events }: Props) => {
         </SwiperSlide>
       </>
     );
-  } else if (events) {
-    content = events.map((e) => (
+  } else if (services) {
+    content = services.map((e) => (
       <SwiperSlide key={e.id}>
-        <ServiceCard event={e} />
+        <ServiceCard service={e} />
       </SwiperSlide>
     ));
   }

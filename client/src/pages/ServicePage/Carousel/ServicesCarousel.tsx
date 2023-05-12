@@ -1,5 +1,5 @@
 import { Box, Heading } from '@chakra-ui/react';
-import { useGeServicesQuery } from '~/store/api/service-slice';
+import { useGetServicesQuery } from '~/store/api/service-slice';
 import { Service, ServicesParam } from '~/types/service';
 import styles from '../service.styles';
 import Carousel from './Carousel';
@@ -22,7 +22,7 @@ const SimilarServicesCarousel = ({ serviceId, serviceFormatId, serviceThemeId }:
     themeId: serviceThemeId,
   };
 
-  const { data, isFetching, isSuccess } = useGeServicesQuery(params);
+  const { data, isFetching, isSuccess } = useGetServicesQuery(params);
 
   let services: Service[] | null = null;
 
