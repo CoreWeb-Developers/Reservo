@@ -1,4 +1,4 @@
-import { User, UsersParam, UsersResponse, Service } from '~/types/user';
+import { User, UsersParam, UsersResponse } from '~/types/user';
 import { apiSlice } from './api-slice';
 
 export const extendedApiSlice = apiSlice.injectEndpoints({
