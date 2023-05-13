@@ -2,13 +2,13 @@ import { Button, useDisclosure } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import DrawerWrapper from '~/components/Drawer/DrawerWrapper';
 import PromoCodeCreateForm from './PromoCodeCreateFrom';
-import { Event } from '~/types/event';
+import { Service } from '~/types/service';
 
 type PropsType = {
-  event: Event;
+  service: Service;
 };
 
-const PromoCodeCreate = ({ event }: PropsType) => {
+const PromoCodeCreate = ({ service }: PropsType) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -17,7 +17,7 @@ const PromoCodeCreate = ({ event }: PropsType) => {
         Create promo code
       </Button>
       <DrawerWrapper isOpen={isOpen} onClose={onClose} title="Create promo code">
-        <PromoCodeCreateForm event={event} />
+        <PromoCodeCreateForm service={service} />
       </DrawerWrapper>
     </>
   );
