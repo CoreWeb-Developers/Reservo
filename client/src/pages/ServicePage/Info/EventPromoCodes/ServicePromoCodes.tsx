@@ -6,15 +6,15 @@ import DrawerWrapper from '~/components/Drawer/DrawerWrapper';
 import Loader from '~/components/Loader/Loader';
 import NothingFound from '../../NothingFound';
 import Pagination from '~/components/Pagination/Pagination';
-import PromoCodeCreate from '~/pages/EventPage/Info/EventPromoCodes/PromoCodeCreate/PromoCodeCreate';
-import EventPromoCode from './ServicePromoCode';
-import type { Event } from '~/types/event';
+import PromoCodeCreate from '~/pages/ServicePage/Info/ServicePromoCodes/PromoCodeCreate/PromoCodeCreate';
+import ServicePromoCode from './ServicePromoCode';
+import type { Service } from '~/types/service';
 
 type PropsType = {
-  event: Event;
+  service: Service;
 };
 
-const EventPromoCodes = ({ event }: PropsType) => {
+const ServicePromoCodes = ({ service }: PropsType) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [curPage, setCurPage] = useState(1);
   const itemsPerPage = 5;
@@ -22,7 +22,7 @@ const EventPromoCodes = ({ event }: PropsType) => {
   const { data, isLoading, error } = useGetPromoCodesQuery({
     _start: (curPage - 1) * itemsPerPage,
     _end: curPage * itemsPerPage,
-    eventId: event.id,
+    serviceId: service.id,
   });
 
   return (
@@ -32,7 +32,7 @@ const EventPromoCodes = ({ event }: PropsType) => {
       </Button>
       <DrawerWrapper isOpen={isOpen} onClose={onClose} title="Promo codes">
         <>
-          <PromoCodeCreate event={event} />
+          <PromoCodeCreate service={service} />
 
           {isLoading ? (
             <Loader isFullScreen={false} />
@@ -40,7 +40,7 @@ const EventPromoCodes = ({ event }: PropsType) => {
             <>
               <VStack spacing="4" py="4">
                 {data?.promoCodes.map((promoCode) => (
-                  <EventPromoCode key={promoCode.id} promoCode={promoCode} />
+                  <ServicePromoCode key={promoCode.id} promoCode={promoCode} />
                 ))}
               </VStack>
               <Flex w="100%" alignItems="center" justifyContent="center" py="30px">
@@ -62,4 +62,4 @@ const EventPromoCodes = ({ event }: PropsType) => {
   );
 };
 
-export default EventPromoCodes;
+export default ServicePromoCodes;
