@@ -1,13 +1,13 @@
 import Container from '~/components/Container';
 import { useAppSelector } from '~/hooks/use-app-selector';
-import EventList from '../Home/Events/EventList';
+import ServiceList from '../Home/Services/ServiceList';
 
 const Tickets = () => {
   const { user } = useAppSelector((state) => state.profile);
 
   return (
     <Container>
-      <EventList dateRange={null} userId={Number(user.id)} />
+      <ServiceList dateRange={null} userId={Number(user.id)} />
     </Container>
   );
 };

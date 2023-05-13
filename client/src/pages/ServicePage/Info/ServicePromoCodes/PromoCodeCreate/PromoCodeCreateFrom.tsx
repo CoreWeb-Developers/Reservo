@@ -5,14 +5,14 @@ import useRequestHandler from '~/hooks/use-request-handler';
 import { useCreatePromoCodeMutation } from '~/store/api/promo-code-slice';
 import { createSchema } from '~/validation/promo-code';
 import type { ICreate } from '~/validation/promo-code';
-import { Event } from '~/types/event';
+import { Service } from '~/types/service';
 import type { CreatePromoCodesPayload } from '~/types/promo-code';
 
 type PropsType = {
-  event: Event;
+  service: Service;
 };
 
-const PromoCodeCreateForm = ({ event }: PropsType) => {
+const PromoCodeCreateForm = ({ service }: PropsType) => {
   const [create, { isLoading }] = useCreatePromoCodeMutation();
 
   const {
@@ -29,7 +29,7 @@ const PromoCodeCreateForm = ({ event }: PropsType) => {
   });
 
   const onSubmit = async (data: ICreate) => {
-    await updateHandler({ ...data, eventId: event.id });
+    await updateHandler({ ...data, serviceId: service.id });
   };
 
   return (
