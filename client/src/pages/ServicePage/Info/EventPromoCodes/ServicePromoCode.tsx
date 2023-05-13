@@ -10,7 +10,7 @@ type PropsType = {
   promoCode: PromoCode;
 };
 
-const EventPromoCode = ({ promoCode }: PropsType) => {
+const ServicePromoCode = ({ promoCode }: PropsType) => {
   const [isEdit, setIsEdit] = useState(false);
 
   const [deletePromoCode] = useDeletePromoCodeMutation();
@@ -51,4 +51,4 @@ const EventPromoCode = ({ promoCode }: PropsType) => {
   );
 };
 
-export default EventPromoCode;
+export default ServicePromoCode;
