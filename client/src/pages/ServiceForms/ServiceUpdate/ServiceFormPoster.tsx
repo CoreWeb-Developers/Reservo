@@ -23,13 +23,13 @@ const ServiceFormPoster = ({ service }: IProps) => {
     reset,
   } = useForm<FormValues>();
 
-  const [updatePoster, { isLoading: isUpdateLoading }] = useUpdateEventPosterMutation();
-  const [deletePoster, { isLoading: isDeleteLoading }] = useDeleteEventPosterMutation();
+  const [updatePoster, { isLoading: isUpdateLoading }] = useUpdateServicePosterMutation();
+  const [deletePoster, { isLoading: isDeleteLoading }] = useDeleteServicePosterMutation();
 
   const updateHandler = async (data: FormData) => {
     try {
-      await updatePoster({ form: data, id: event.id }).unwrap();
-      toast("You've successfully updated event's poster.", 'success');
+      await updatePoster({ form: data, id: service.id }).unwrap();
+      toast("You've successfully updated services's poster.", 'success');
       reset();
     } catch (error: any) {
       toast(error.data.message, 'error');
@@ -38,7 +38,7 @@ const ServiceFormPoster = ({ service }: IProps) => {
 
   const { handler: deleteHandler } = useRequestHandler<number>({
     f: deletePoster,
-    successMsg: "You've successfully removed event's poster.",
+    successMsg: "You've successfully removed services's poster.",
   });
 
   const { onSubmit } = useFileSubmit({ handleSubmit, requestHandler: updateHandler, reset, fieldName: 'poster' });
@@ -49,8 +49,8 @@ const ServiceFormPoster = ({ service }: IProps) => {
         <FormControl isInvalid={!!errors.files} isRequired>
           <FileUpload
             register={register('files', { validate })}
-            avatar={AVATAR_PATH(event.picturePath)}
-            name={event.name as string}
+            avatar={AVATAR_PATH(service.picturePath)}
+            name={service.name as string}
             isPoster={true}
           />
 
@@ -62,11 +62,11 @@ const ServiceFormPoster = ({ service }: IProps) => {
             Save
           </Button>
           <Button
-            isDisabled={!event.picturePath}
+            isDisabled={!service.picturePath}
             colorScheme="red"
             isLoading={isDeleteLoading}
             onClick={async () => {
-              await deleteHandler(event.id);
+              await deleteHandler(service.id);
             }}
           >
             Remove
@@ -77,4 +77,4 @@ const ServiceFormPoster = ({ service }: IProps) => {
   );
 };
 
-export default EventFormPoster;
+export default ServiceFormPoster;
