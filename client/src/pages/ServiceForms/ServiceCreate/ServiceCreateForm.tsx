@@ -26,7 +26,7 @@ import AsyncSelectCompany from '~/components/Select/AsyncSelectCompany';
 import AsyncSelectFormat from '~/components/Select/AsyncSelectFormat';
 import AsyncSelectTheme from '~/components/Select/AsyncSelectTheme';
 import { SelectOptionData } from '~/types/select-option-data';
-import styles from '../services-form.styles';
+import styles from '../service-form.styles';
 import layoutStyles from '~/components/Layout/layout.styles';
 
 const ServiceCreateForm = () => {

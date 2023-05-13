@@ -25,7 +25,7 @@ import PlacesSearch from '~/components/PlacesSearch/PlacesSearch';
 import AsyncSelectFormat from '~/components/Select/AsyncSelectFormat';
 import AsyncSelectTheme from '~/components/Select/AsyncSelectTheme';
 import { SelectOptionData } from '~/types/select-option-data';
-import styles from '../event-form.styles';
+import styles from '../service-form.styles';
 import layoutStyles from '~/components/Layout/layout.styles';
 
 type IProps = {
