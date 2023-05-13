@@ -1,0 +1,23 @@
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .button {
+    background-color: blue;
+    color: white;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .button:hover {
+    background-color: white;
+    color: rgb(56, 56, 169);
+    border: 2px solid blue;
+  }
+  
