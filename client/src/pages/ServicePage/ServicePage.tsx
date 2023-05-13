@@ -4,11 +4,11 @@ import Container from '~/components/Container';
 import Loader from '~/components/Loader/Loader';
 import PageAlert from '~/components/PageAlert/PageAlert';
 import { useLazyGetCompanyQuery } from '~/store/api/company-slice';
-import { useGetEventQuery } from '~/store/api/event-slice';
+import { useGetServiceQuery } from '~/store/api/service-slice';
 import { Company } from '~/types/company';
 import IError from '~/types/error';
-import CompanyEventsCarousel from './Carousel/CompanyServicesCarousel';
-import SimilarEventsCarousel from './Carousel/ServicesCarousel';
+import CompanyServicesCarousel from './Carousel/CompanyServicesCarousel';
+import SimilarServicesCarousel from './Carousel/ServicesCarousel';
 import Comments from './Comments/Comments';
 import CompanyInfo from './Info/CompanyInfo';
 import ServiceInfo from './Info/ServiceInfo';
@@ -16,17 +16,17 @@ import ServiceUpdateForm from '~/pages/ServiceForms/ServiceUpdate/ServiceUpdateF
 
 const ServicePage = () => {
   const { id } = useParams();
-  const { data: event, isLoading: isLoadingEvent, error } = useGetEventQuery(Number(id));
+  const { data: service, isLoading: isLoadingService, error } = useGetServiceQuery(Number(id));
   const [getCompany, { data: company, isLoading: isLoadingCompany }] = useLazyGetCompanyQuery();
   const [isEdit, setIsEdit] = useState(false);
 
   useEffect(() => {
-    if (event && event.id) {
-      getCompany(event.companyId);
+    if (service && service.id) {
+      getCompany(service.companyId);
     }
-  }, [event]);
+  }, [service]);
 
-  if (isLoadingEvent || isLoadingCompany || ((!event || !company) && !error)) {
+  if (isLoadingService || isLoadingCompany || ((!service || !company) && !error)) {
     return <Loader />;
   }
 
@@ -37,14 +37,14 @@ const ServicePage = () => {
   return (
     <>
       {isEdit ? (
-        <ServiceUpdateForm event={event} setEdit={setIsEdit} />
+        <ServiceUpdateForm service={service} setEdit={setIsEdit} />
       ) : (
         <Container pb="16">
-          <ServiceInfo event={event} company={company as Company} setEdit={setIsEdit}></ServiceInfo>
+          <ServiceInfo service={service} company={company as Company} setEdit={setIsEdit}></ServiceInfo>
           <CompanyInfo company={company as Company}></CompanyInfo>
-          <Comments eventId={event.id} />
-          <SimilarEventsCarousel eventId={event.id} eventFormatId={event.formatId} eventThemeId={event.themeId} />
-          <CompanyEventsCarousel eventId={event.id} companyId={event.companyId} />
+          <Comments serviceId={service.id} />
+          <SimilarServicesCarousel serviceId={service.id} serviceFormatId={service.formatId} serviceThemeId={service.themeId} />
+          <CompanyServicesCarousel serviceId={service.id} companyId={service.companyId} />
         </Container>
       )}
     </>

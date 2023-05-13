@@ -17,62 +17,62 @@ import {
   } from '@chakra-ui/react';
   import { FiCalendar, FiMapPin, FiUsers } from 'react-icons/fi';
   import styles from '../service.styles';
-  import { Event } from '~/types/event';
+  import { Service } from '~/types/service';
   import GoogleMap from '~/components/GoogleMap/GoogleMap';
-  import { FALLBACK_POSTER, GET_DISPLAY_EVENT } from '~/consts/event';
+  import { FALLBACK_POSTER, GET_DISPLAY_SERVICE } from '~/consts/service';
   import { useAppSelector } from '~/hooks/use-app-selector';
-  import EventSubscribe from './EventSubscribe';
-  import EventVisitors from './EventVisitors';
+  import ServiceSubscribe from './ServiceSubscribe';
+  import ServiceVisitors from './ServiceVisitors';
   import { useState, useEffect } from 'react';
   import Geocode from '~/consts/geocode';
   import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
   import type { Company } from '~/types/company';
   import ConfirmPopover from '~/components/ConfirmPopover/ConfirmPopover';
-  import { useDeleteEventMutation, useGetEventsQuery } from '~/store/api/event-slice';
+  import { useDeleteServiceMutation, useGetServicesQuery } from '~/store/api/service-slice';
   import useRequestHandler from '~/hooks/use-request-handler';
   import { useNavigate } from 'react-router-dom';
-  import EventPromoCodes from './EventPromoCodes/EventPromoCodes';
+  import ServicePromoCodes from './ServicePromoCodes/ServicePromoCodes';
   
   type PropType = {
-    event: Event;
+    service: Service;
     company: Company;
     setEdit: React.Dispatch<React.SetStateAction<boolean>>;
   };
   
-  const EventInfo = ({ event, company, setEdit }: PropType) => {
+  const ServiceInfo = ({ service, company, setEdit }: PropType) => {
     const { user } = useAppSelector((state) => state.profile);
-    const eventTitle = `${event.name} by ${company.name}`;
-    const e = GET_DISPLAY_EVENT(event);
+    const serviceTitle = `${service.name} by ${company.name}`;
+    const e = GET_DISPLAY_SERVICE(service);
     const tags = [e.format.name, e.theme.name];
   
     const { isOpen: isFormOpen, onOpen: onFormOpen, onClose: onFormClose } = useDisclosure();
   
     const navigate = useNavigate();
-    const [deleteEvent, { isLoading: isDeleteLoading }] = useDeleteEventMutation();
+    const [deleteService, { isLoading: isDeleteLoading }] = useDeleteServiceMutation();
     const { onOpen: onOpenDelete, onClose: onCloseDelete, isOpen: isOpenDelete } = useDisclosure();
   
     const { handler: deleteHandler } = useRequestHandler<number>({
-      f: deleteEvent,
-      successMsg: "You've successfully deleted the event",
+      f: deleteService,
+      successMsg: "You've successfully deleted the service",
       successF: () => {
         navigate('/');
       },
     });
   
-    const { data, isFetching: isVisitorFetching } = useGetEventsQuery({
-      id: event.id,
+    const { data, isFetching: isVisitorFetching } = useGetServicesQuery({
+      id: service.id,
       userId: Number(user.id),
     });
   
-    const isVisitor = data?.events?.length !== 0;
+    const isVisitor = data?.services?.length !== 0;
   
-    const isEnded = Number(new Date()) - Number(new Date(event.date)) > 0;
-    const isPublished = Number(new Date()) - Number(new Date(event.publishDate)) > 0;
+    const isEnded = Number(new Date()) - Number(new Date(service.date)) > 0;
+    const isPublished = Number(new Date()) - Number(new Date(service.publishDate)) > 0;
   
     const [address, setAddress] = useState('');
   
     useEffect(() => {
-      Geocode.fromLatLng(event.latitude.toString(), event.longitude.toString()).then(
+      Geocode.fromLatLng(service.latitude.toString(), service.longitude.toString()).then(
         (response) => {
           const address = response.results[0].formatted_address;
           setAddress(address);
@@ -85,7 +85,7 @@ import {
   
     const getTicketButtonText = () => {
       if (isVisitor) {
-        return 'You already have a ticket';
+        return 'You already booked this service';
       }
       if (isEnded) {
         return 'Sales Ended';
@@ -93,7 +93,7 @@ import {
       if (!isPublished) {
         return 'Sales have not started';
       }
-      return 'Get a ticket';
+      return 'Book the service';
     };
   
     return (
@@ -106,13 +106,13 @@ import {
             fallbackSrc={e.picturePath && e.id ? undefined : FALLBACK_POSTER}
             boxSize="full"
             objectFit="contain"
-            alt="Event image"
+            alt="Service image"
           />
         </Flex>
         <Flex pt="8" justify="space-between" sx={styles.info}>
           <VStack spacing={4} align="flex-start" sx={styles.mainInfo}>
             <Text fontSize="lg">{e.shortDate}</Text>
-            <Heading fontSize={{ base: '3xl', md: '5xl' }}>{eventTitle.toUpperCase()}</Heading>
+            <Heading fontSize={{ base: '3xl', md: '5xl' }}>{serviceTitle.toUpperCase()}</Heading>
             <Text fontSize="xl">{e.description}</Text>
             <HStack spacing="4">
               {tags.map((t, i) => (
@@ -128,7 +128,7 @@ import {
                 <TagLeftIcon boxSize="6" as={FiUsers} />
                 <TagLabel pl="2">{e.availability}</TagLabel>
               </Tag>
-              <EventVisitors event={event} />
+              <ServiceVisitors service={service} />
             </Wrap>
             <Card p={{ base: '4', sm: '10' }} variant="filled" w="100%">
               <Flex flexDir="column" justify="center" w="100%">
@@ -145,18 +145,18 @@ import {
                 >
                   {getTicketButtonText()}
                 </Button>
-                <EventSubscribe isOpen={isFormOpen} onClose={onFormClose} event={event} />
+                <ServiceSubscribe isOpen={isFormOpen} onClose={onFormClose} service={service} />
               </Flex>
             </Card>
   
             {Number(user.id) === company.userId && (
               <HStack spacing={4} alignSelf="flex-end">
-                {!!Number(event.price) && <EventPromoCodes event={event} />}
+                {!!Number(service.price) && <ServicePromoCodes service={service} />}
                 <Button onClick={() => setEdit(true)} leftIcon={<EditIcon />}>
                   Edit
                 </Button>
                 <ConfirmPopover
-                  header="Are you sure you want to delete the event?"
+                  header="Are you sure you want to delete the service?"
                   trigger={
                     <Button
                       onClick={onOpenDelete}
@@ -168,7 +168,7 @@ import {
                     </Button>
                   }
                   onConfirm={() => {
-                    deleteHandler(event.id);
+                    deleteHandler(service.id);
                   }}
                   isOpen={isOpenDelete}
                   onClose={onCloseDelete}
@@ -206,5 +206,5 @@ import {
     );
   };
   
-  export default EventInfo;
+  export default ServiceInfo;
   

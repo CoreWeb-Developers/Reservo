@@ -1,23 +1,23 @@
 import { Button, FormControl, FormLabel, Input, Switch, VStack } from '@chakra-ui/react';
-import { useCheckoutForEventMutation } from '~/store/api/event-slice';
+import { useCheckoutForServiceMutation } from '~/store/api/service-slice';
 import useCustomToast from '~/hooks/use-custom-toast';
 import DrawerWrapper from '~/components/Drawer/DrawerWrapper';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { ISubscribe, subscribeSchema } from '~/validation/event';
-import { Event } from '~/types/event';
-import { STRIPE_API_KEY } from '~/consts/event';
+import { ISubscribe, subscribeSchema } from '~/validation/service';
+import { Service } from '~/types/service';
+import { STRIPE_API_KEY } from '~/consts/service';
 import { loadStripe } from '@stripe/stripe-js';
 
 type PropsType = {
-  event: Event;
+  service: Service;
   isOpen: boolean;
   onClose: () => void;
 };
 
-const EventSubscribe = ({ event: { id, price }, isOpen, onClose }: PropsType) => {
+const ServiceSubscribe = ({ service: { id, price }, isOpen, onClose }: PropsType) => {
   price = Number(price);
-  const [subscribe, { isLoading }] = useCheckoutForEventMutation();
+  const [subscribe, { isLoading }] = useCheckoutForServiceMutation();
 
   const { register, handleSubmit } = useForm<ISubscribe>({
     resolver: zodResolver(subscribeSchema),
@@ -28,7 +28,7 @@ const EventSubscribe = ({ event: { id, price }, isOpen, onClose }: PropsType) =>
     try {
       const result = await subscribe({ ...data, id }).unwrap();
       if (!price && result.sessionId === -1) {
-        toast('You are successfully subscribed to the event', 'success');
+        toast('You are successfully subscribed to the service', 'success');
         return;
       }
       const stripe = await loadStripe(STRIPE_API_KEY);
@@ -41,7 +41,7 @@ const EventSubscribe = ({ event: { id, price }, isOpen, onClose }: PropsType) =>
   };
 
   return (
-    <DrawerWrapper title="Event subscription" isOpen={isOpen} onClose={onClose}>
+    <DrawerWrapper title="Service subscription" isOpen={isOpen} onClose={onClose}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <VStack spacing={8}>
           <FormControl display="flex" alignItems="center">
@@ -63,7 +63,7 @@ const EventSubscribe = ({ event: { id, price }, isOpen, onClose }: PropsType) =>
             </FormControl>
           )}
           <Button type="submit" colorScheme="blue" isLoading={isLoading}>
-            Subscribe to an event
+            Subscribe to an service
           </Button>
         </VStack>
       </form>
@@ -71,4 +71,4 @@ const EventSubscribe = ({ event: { id, price }, isOpen, onClose }: PropsType) =>
   );
 };
 
-export default EventSubscribe;
+export default ServiceSubscribe;

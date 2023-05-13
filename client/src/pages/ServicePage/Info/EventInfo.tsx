@@ -21,8 +21,8 @@ import { Event } from '~/types/event';
 import GoogleMap from '~/components/GoogleMap/GoogleMap';
 import { FALLBACK_POSTER, GET_DISPLAY_EVENT } from '~/consts/event';
 import { useAppSelector } from '~/hooks/use-app-selector';
-import EventSubscribe from './EventSubscribe';
-import EventVisitors from './EventVisitors';
+import EventSubscribe from './ServiceSubscribe';
+import EventVisitors from './ServiceVisitors';
 import { useState, useEffect } from 'react';
 import Geocode from '~/consts/geocode';
 import { EditIcon, DeleteIcon } from '@chakra-ui/icons';
@@ -31,7 +31,7 @@ import ConfirmPopover from '~/components/ConfirmPopover/ConfirmPopover';
 import { useDeleteEventMutation, useGetEventsQuery } from '~/store/api/event-slice';
 import useRequestHandler from '~/hooks/use-request-handler';
 import { useNavigate } from 'react-router-dom';
-import EventPromoCodes from './EventPromoCodes/EventPromoCodes';
+import EventPromoCodes from './EventPromoCodes/ServicePromoCodes';
 
 type PropType = {
   event: Event;

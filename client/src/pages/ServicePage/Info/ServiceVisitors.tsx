@@ -6,21 +6,21 @@ import { AVATAR_PATH } from '~/consts/avatar';
 import { useAppSelector } from '~/hooks/use-app-selector';
 import { useGetUsersQuery } from '~/store/api/user-slice';
 import NothingFound from '../NothingFound';
-import { Event } from '~/types/event';
+import { Service } from '~/types/service';
 import Pagination from '~/components/Pagination/Pagination';
 import { useState } from 'react';
 
 type PropsType = {
-  event: Event;
+  service: Service;
 };
 
-const EventVisitors = ({ event }: PropsType) => {
+const ServiceVisitors = ({ service }: PropsType) => {
   const itemsPerPage = 10;
   const [page, setPage] = useState(1);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const { data, isLoading, error } = useGetUsersQuery({
-    eventId: event.id,
+    service: service.id,
     _sort: 'id',
     _order: 'ASC' as const,
     _start: (page - 1) * itemsPerPage,
@@ -39,7 +39,7 @@ const EventVisitors = ({ event }: PropsType) => {
       >
         View visitors
       </Button>
-      <DrawerWrapper isOpen={isOpen} onClose={onClose} title="Visitors of the event">
+      <DrawerWrapper isOpen={isOpen} onClose={onClose} title="Visitors of the service">
         {isLoading ? (
           <Loader isFullScreen={false} />
         ) : data?.users?.length ? (
@@ -74,4 +74,4 @@ const EventVisitors = ({ event }: PropsType) => {
   );
 };
 
-export default EventVisitors;
+export default ServiceVisitors;

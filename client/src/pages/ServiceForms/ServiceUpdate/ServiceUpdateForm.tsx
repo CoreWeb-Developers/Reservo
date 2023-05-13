@@ -13,14 +13,14 @@ import {
   Switch,
 } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState, useEffect, ChangeEvent } from 'react';
+import { useState, useEffect, ChangeService } from 'react';
 import { useForm } from 'react-hook-form';
 import useRequestHandler from '~/hooks/use-request-handler';
-import { useUpdateEventMutation } from '~/store/api/event-slice';
-import { updateSchema } from '~/validation/event';
-import type { IUpdate } from '~/validation/event';
-import type { Event } from '~/types/event';
-import EventFormPoster from './ServiceFormPoster';
+import { useUpdateServiceMutation } from '~/store/api/service-slice';
+import { updateSchema } from '~/validation/service';
+import type { IUpdate } from '~/validation/service';
+import type { Service } from '~/types/service';
+import ServiceFormPoster from './ServiceFormPoster';
 import PlacesSearch from '~/components/PlacesSearch/PlacesSearch';
 import AsyncSelectFormat from '~/components/Select/AsyncSelectFormat';
 import AsyncSelectTheme from '~/components/Select/AsyncSelectTheme';
@@ -29,7 +29,7 @@ import styles from '../service-form.styles';
 import layoutStyles from '~/components/Layout/layout.styles';
 
 type IProps = {
-  event: Event;
+  service: Service;
   setEdit: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
@@ -41,16 +41,16 @@ const getSelectDefaultOption = ({ id, name }: { id: number; name: string }) => {
   };
 };
 
-const EventUpdateForm = ({ event, setEdit }: IProps) => {
-  const [update, { isLoading }] = useUpdateEventMutation();
-  const { picturePath, id, companyId, ...defaultValues } = event;
+const ServiceUpdateForm = ({ service, setEdit }: IProps) => {
+  const [update, { isLoading }] = useUpdateServiceMutation();
+  const { picturePath, id, companyId, ...defaultValues } = service;
 
   const [date, setDate] = useState(defaultValues.date.slice(0, 16));
   const [publishDate, setPublishDate] = useState(defaultValues.publishDate.slice(0, 16));
   const [isFree, setIsFree] = useState<boolean>(Number(defaultValues.price) === 0);
   const [isPublishNow, setIsPublishNow] = useState<boolean>(new Date(defaultValues.publishDate) <= new Date());
-  const [format, setFormat] = useState<SelectOptionData | null>(getSelectDefaultOption(event.format));
-  const [theme, setTheme] = useState<SelectOptionData | null>(getSelectDefaultOption(event.theme));
+  const [format, setFormat] = useState<SelectOptionData | null>(getSelectDefaultOption(service.format));
+  const [theme, setTheme] = useState<SelectOptionData | null>(getSelectDefaultOption(service.theme));
 
   const {
     register,
@@ -76,22 +76,22 @@ const EventUpdateForm = ({ event, setEdit }: IProps) => {
     await updateHandler({ ...data, id });
   };
 
-  const onDateChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onDateChange = (e: ChangeService<HTMLInputElement>) => {
     setDate(e.target.value);
     setValue('date', new Date(e.target.value), { shouldValidate: true });
   };
 
-  const onPublishDateChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onPublishDateChange = (e: ChangeService<HTMLInputElement>) => {
     setPublishDate(e.target.value);
     setValue('publishDate', new Date(e.target.value), { shouldValidate: true });
   };
 
-  const onFreeChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onFreeChange = (e: ChangeService<HTMLInputElement>) => {
     setIsFree(e.target.checked);
     setValue('price', 0, { shouldValidate: true });
   };
 
-  const onPublishNowChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const onPublishNowChange = (e: ChangeService<HTMLInputElement>) => {
     setIsPublishNow(e.target.checked);
     setValue('publishDate', new Date(), { shouldValidate: true });
     setPublishDate(new Date().toJSON().slice(0, 16));
@@ -115,7 +115,7 @@ const EventUpdateForm = ({ event, setEdit }: IProps) => {
         <CardHeader>
           <Flex flexDir="row">
             <Flex flexDir="column" flexGrow="0">
-              <EventFormPoster event={event} />
+              <ServiceFormPoster service={service} />
             </Flex>
             <Flex justify="flex-end" flexGrow="1" marginLeft="10px">
               <Button onClick={() => setEdit(false)} variant="outline">
@@ -167,13 +167,13 @@ const EventUpdateForm = ({ event, setEdit }: IProps) => {
               </FormControl>
               <FormControl isInvalid={!!errors.isNotificationsOn}>
                 <FormLabel htmlFor="isNotificationsOn">
-                  Do you want to receive notifications about new visitors of the event?
+                  Do you want to receive notifications about new visitors of the service?
                 </FormLabel>
                 <Switch id="isNotificationsOn" {...register('isNotificationsOn')} />
                 <FormErrorMessage>{errors.isNotificationsOn?.message}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={!!errors.isPublic}>
-                <FormLabel htmlFor="isPublic">Can everybody see the list of event visitors?</FormLabel>
+                <FormLabel htmlFor="isPublic">Can everybody see the list of service visitors?</FormLabel>
                 <Switch id="isPublic" {...register('isPublic')} />
                 <FormErrorMessage>{errors.isPublic?.message}</FormErrorMessage>
               </FormControl>
@@ -223,4 +223,4 @@ const EventUpdateForm = ({ event, setEdit }: IProps) => {
   );
 };
 
-export default EventUpdateForm;
+export default ServiceUpdateForm;

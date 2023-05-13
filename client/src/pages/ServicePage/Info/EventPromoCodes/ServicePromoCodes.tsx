@@ -7,7 +7,7 @@ import Loader from '~/components/Loader/Loader';
 import NothingFound from '../../NothingFound';
 import Pagination from '~/components/Pagination/Pagination';
 import PromoCodeCreate from '~/pages/EventPage/Info/EventPromoCodes/PromoCodeCreate/PromoCodeCreate';
-import EventPromoCode from './EventPromoCode';
+import EventPromoCode from './ServicePromoCode';
 import type { Event } from '~/types/event';
 
 type PropsType = {
