@@ -131,7 +131,7 @@ const ServiceCreateForm = () => {
                 </FormControl>
               )}
               <FormControl isInvalid={!!errors.ticketsAvailable} isRequired>
-                <FormLabel htmlFor="ticketsAvailable">Amount of tickets</FormLabel>
+                <FormLabel htmlFor="ticketsAvailable">Slots available</FormLabel>
                 <Input
                   id="ticketsAvailable"
                   type="number"
@@ -142,7 +142,7 @@ const ServiceCreateForm = () => {
               </FormControl>
               <FormControl isInvalid={!!errors.isNotificationsOn}>
                 <FormLabel htmlFor="isNotificationsOn">
-                  Do you want to receive notifications about new clients for the service?
+                  Do you want to receive notifications about new customers for the service?
                 </FormLabel>
                 <Switch id="isNotificationsOn" {...register('isNotificationsOn')} />
                 <FormErrorMessage>{errors.isNotificationsOn?.message}</FormErrorMessage>
