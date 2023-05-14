@@ -32,7 +32,7 @@ const updateSchema = z
     name: z.string().min(SERVICE_NAME_LENGTH.min).max(SERVICE_NAME_LENGTH.max),
     description: z.string().min(SERVICE_DESCRIPTION_LENGTH.min).max(SERVICE_DESCRIPTION_LENGTH.max),
     price: z.number({ invalid_type_error: 'Input price' }).min(0),
-    ticketsAvailable: z.number({ invalid_type_error: 'Input number of tickets' }).positive(),
+    ticketsAvailable: z.number({ invalid_type_error: 'Input number of slots available' }).positive(),
     isNotificationsOn: z.boolean(),
     isPublic: z.boolean(),
     date: z.coerce.date().min(new Date(), { message: 'Set date in the future' }),
