@@ -18,17 +18,11 @@ const ServiceCreate = () => (
         <AutocompleteInput optionText="name" fullWidth />
       </ReferenceInput>
       <NumberInput source="price" />
-      <NumberInput source="ticketsAvailable" />
+      <NumberInput source="slotsAvailable" />
       <NumberInput source="latitude" />
       <NumberInput source="longitude" />
       <BooleanInput label="Public" source="isPublic" />
       <BooleanInput label="Notifications" source="isNotificationsOn" />
-      <ReferenceInput label="Format" source="formatId" reference="formats">
-        <AutocompleteInput optionText="name" />
-      </ReferenceInput>
-      <ReferenceInput label="Theme" source="themeId" reference="themes">
-        <AutocompleteInput optionText="name" />
-      </ReferenceInput>
       <DateTimeInput label="Publication date" source="publishDate" />
       <DateTimeInput source="date" />
       <TextInput source="description" fullWidth multiline />
