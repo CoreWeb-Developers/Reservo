@@ -135,7 +135,7 @@ const ServiceCreateForm = () => {
                 <Input
                   id="ticketsAvailable"
                   type="number"
-                  placeholder="amount of tickets"
+                  placeholder="Slots available"
                   {...register('ticketsAvailable', { valueAsNumber: true })}
                 />
                 <FormErrorMessage>{errors.ticketsAvailable?.message}</FormErrorMessage>
