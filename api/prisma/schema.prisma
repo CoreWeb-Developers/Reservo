@@ -20,6 +20,7 @@ model User {
   companies     Company[]
   comments      Comment[]
   events        UserEvent[]
+  services      UserService[]
   subscriptions SubscriptionToCompany[]
 
   @@map("user")
@@ -39,14 +40,14 @@ model UserEvent {
 
 model UserService {
   userId    Int     @map("user_id")
-  serviceId   Int     @map("event_id")
+  serviceId   Int     @map("service_id")
   isVisible Boolean @default(true) @map("is_visible")
 
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   service Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
 
   @@id([userId, serviceId])
-  @@map("user_service")
+  @@map("user_service_id")
 }
 
 model SubscriptionToCompany {
@@ -85,11 +86,9 @@ model Comment {
   publishDate DateTime @default(now()) @map("publish_date") @db.Timestamp(1)
   userId      Int      @map("user_id")
   eventId     Int      @map("event_id")
-  serviceId   Int      @map("service_id")
 
   user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
   event Event @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  service Service @relation(fields: [serviceId], references: [id], on: Cascade)
 
   @@map("comment")
 }
@@ -138,7 +137,7 @@ model EventTheme {
   @@map("event_theme")
 }
 
-model ServiceModel {
+model Service {
   id                Int      @id @default(autoincrement())
   name              String   @unique @db.VarChar(255)
   description       String   @db.Text
@@ -152,35 +151,13 @@ model ServiceModel {
   isPublic          Boolean  @default(true) @map("is_public") // who can see list of visitors everybody or only users who are going to the event
   publishDate       DateTime @default(now()) @map("publish_date") @db.Timestamp(1)
   companyId         Int      @map("company_id")
-  formatId          Int      @map("format_id")
-  themeId           Int      @map("theme_id")
 
   company Company     @relation(fields: [companyId], references: [id], onDelete: Cascade)
-  format  ServiceFormat @relation(fields: [formatId], references: [id], onDelete: Restrict)
-  theme   ServiceTheme  @relation(fields: [themeId], references: [id], onDelete: Restrict)
-
-  comments   Comment[]
-  promoCodes PromoCode[]
   visitors   UserService[]
 
   @@map("service")
 }
 
-model ServiceFormat {
-  id     Int     @id @default(autoincrement())
-  name   String  @unique @db.VarChar(255)
-  services Service[]
-
-  @@map("service_format")
-}
-
-model ServiceTheme {
-  id     Int     @id @default(autoincrement())
-  name   String  @unique @db.VarChar(255)
-  services Service[]
-
-  @@map("service_theme")
-}
 
 model PromoCode {
   id        Int    @id @default(autoincrement())
@@ -188,7 +165,6 @@ model PromoCode {
   discount  Int
   eventId   Int    @map("event_id")
   event     Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
-  service   Service @relation(fields: [eventId], references: [id], onDelete: Cascade)
 
   @@map("promo_code")
 }

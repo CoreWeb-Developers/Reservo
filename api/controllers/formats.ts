@@ -117,7 +117,7 @@ const deleteFormat = async (req: Request, res: Response) => {
     },
   });
   if (foundEvent) {
-    throw new ClientError('There are events using this format, so you can not delete it.', 403);
+    throw new ClientError('There are events/service using this format, so you can not delete it.', 403);
   }
 
   await format.delete({

@@ -7,19 +7,15 @@ import CarouselNothingFound from './CarouselNothingFound';
 
 type Props = {
   serviceId: number;
-  serviceFormatId: number;
-  serviceThemeId: number;
 };
 
-const SimilarServicesCarousel = ({ serviceId, serviceFormatId, serviceThemeId }: Props) => {
+const SimilarServicesCarousel = ({ serviceId }: Props) => {
   const params: ServicesParam = {
     _sort: 'date',
     _order: 'ASC' as const,
     _start: 0,
     _end: 20,
     upcoming: true,
-    formatId: serviceFormatId,
-    themeId: serviceThemeId,
   };
 
   const { data, isFetching, isSuccess } = useGetServicesQuery(params);

@@ -5,9 +5,9 @@ import ServiceService from '../services/service';
 import { compareDates } from '../utils/compare-dates';
 import { getPageOptions } from '../utils/query-options';
 import Avatar from '../services/avatar';
-import { scheduleEventReminder } from '../jobs/event-reminder';
+import { scheduleServiceReminder } from '../jobs/service-reminder';
 import subtractHours from '../utils/subtract-hours';
-import { HOURS_BEFORE_EVENT } from '../consts/default';
+import { HOURS_BEFORE_SERVICE } from '../consts/default';
 import wait from '../utils/wait';
 import ClientError from '../types/error';
 import CompanyService from '../services/company';
@@ -35,7 +35,7 @@ const createService = async (req: Request, res: Response) => {
   });
 
   scheduleCompanySubscribersNotification(new Date(publishDate), newService.id);
-  scheduleEventReminder(subtractHours(date, HOURS_BEFORE_EVENT), newService.id);
+  scheduleServiceReminder(subtractHours(date, HOURS_BEFORE_SERVICE), newService.id);
 
   res.status(201).json(newService);
 };
@@ -96,7 +96,7 @@ const updateService = async (req: Request, res: Response) => {
   }
 
   if (compareDates(new Date(date), oldService.date)) {
-    scheduleEventReminder(subtractHours(date, HOURS_BEFORE_EVENT), serviceId);
+    scheduleServiceReminder(subtractHours(date, HOURS_BEFORE_SERVICE), serviceId);
   }
 
   res.json(updatedService);
@@ -123,7 +123,7 @@ const updatePoster = async (req: Request, res: Response) => {
   const toUpdate = await service.findUnique({ where: { id: serviceId } });
   await Avatar.removeFrom(toUpdate);
 
-  const updatedEvent = await service.update({
+  const updatedService = await service.update({
     where: {
       id: serviceId,
     },
@@ -133,7 +133,7 @@ const updatePoster = async (req: Request, res: Response) => {
     include: { format: true, theme: true },
   });
 
-  res.json(updatedEvent);
+  res.json(updatedService);
 };
 
 const deletePoster = async (req: Request, res: Response) => {

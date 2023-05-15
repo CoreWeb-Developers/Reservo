@@ -1,5 +1,5 @@
 definitions:
-  events:
+  services:
     type: array
     items:
       type: object
@@ -48,7 +48,7 @@ definitions:
               type: integer
             name:
               type: string
-  event:
+  service:
     type: object
     properties:
       id:
@@ -95,7 +95,7 @@ definitions:
             type: integer
           name:
             type: string
-  event_create:
+  service_create:
     type: object
     properties:
       name:
@@ -137,7 +137,7 @@ definitions:
       themeId:
         type: integer
         required: true
-  event_update:
+  service_update:
     type: object
     properties:
       name:
@@ -164,7 +164,7 @@ definitions:
         type: integer
       themeId:
         type: integer
-  event_checkout:
+  service_checkout:
     type: object
     properties:
       isVisible:

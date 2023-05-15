@@ -1,42 +1,42 @@
 import express from 'express';
 import {
-  createEvent,
-  deleteEvent,
+  createService,
+  deleteService,
   deletePoster,
-  getManyEvents,
-  getOneEventById,
-  updateEvent,
+  getManyServices,
+  getOneServiceById,
+  updateService,
   updatePoster,
-} from '../controllers/events';
+} from '../controllers/services';
 import { createSession } from '../controllers/payment';
 import auth, { optionalAuth } from '../middleware/auth';
-import { checkUserCompanyRights, checkUserEventRights } from '../middleware/check-rights';
+import { checkUserCompanyRights, checkUserServiceRights } from '../middleware/check-rights';
 import boundary from '../utils/error-boundary';
 import fileUpload from '../utils/file-upload';
 import validate from '../utils/validation';
 import {
-  createSchema as createEventSchema,
+  createSchema as createServiceSchema,
   ticketSchema,
   updateSchema,
-} from '../validation/events';
+} from '../validation/services';
 
 const router = express.Router();
 
-router.get('/', optionalAuth, boundary(getManyEvents));
-router.get('/:id', boundary(getOneEventById));
+router.get('/', optionalAuth, boundary(getManyServices));
+router.get('/:id', boundary(getOneServiceById));
 
 router.use(auth);
 
-router.post('/', validate(createEventSchema), checkUserCompanyRights, boundary(createEvent));
-router.put('/:id', checkUserEventRights, validate(updateSchema), boundary(updateEvent));
-router.delete('/:id', checkUserEventRights, boundary(deleteEvent));
+router.post('/', validate(createServiceSchema), checkUserCompanyRights, boundary(createService));
+router.put('/:id', checkUserServiceRights, validate(updateSchema), boundary(updateService));
+router.delete('/:id', checkUserServiceRights, boundary(deleteService));
 router.put(
   '/:id/poster',
-  checkUserEventRights,
+  checkUserServiceRights,
   fileUpload.single('poster'),
   boundary(updatePoster),
 );
-router.delete('/:id/poster', checkUserEventRights, boundary(deletePoster));
+router.delete('/:id/poster', checkUserServiceRights, boundary(deletePoster));
 
 router.post('/:id/subscribe', validate(ticketSchema), boundary(createSession));
 

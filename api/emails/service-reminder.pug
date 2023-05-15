@@ -1,0 +1,8 @@
+extends index 
+block title
+	h1 The service '#{serviceName}' will start in #{hoursBeforeservice} hours
+block description
+	div
+		p The service '#{serviceName}' will start at #{serviceDate}
+	div
+		a(href=`${process.env.CLIENT_URL}/services/${serviceId}`) Open service page

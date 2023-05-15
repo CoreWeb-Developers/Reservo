@@ -43,7 +43,6 @@ const ServicePage = () => {
           <ServiceInfo service={service} company={company as Company} setEdit={setIsEdit}></ServiceInfo>
           <CompanyInfo company={company as Company}></CompanyInfo>
           <Comments serviceId={service.id} />
-          <SimilarServicesCarousel serviceId={service.id} serviceFormatId={service.formatId} serviceThemeId={service.themeId} />
           <CompanyServicesCarousel serviceId={service.id} companyId={service.companyId} />
         </Container>
       )}

@@ -1,0 +1,8 @@
+extends index 
+block title
+	h1 You have successfully subscribed to `#{serviceName}`
+block description
+	div
+		p You have successfully payed for and subscribed to `#{serviceName}` which will happen on #{serviceDate}
+	div
+		a(href=`${process.env.CLIENT_URL}/services/${serviceId}`) Open service page

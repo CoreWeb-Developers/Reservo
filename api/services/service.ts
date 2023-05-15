@@ -5,9 +5,7 @@ import prisma from '../lib/prisma';
 import ClientError from '../types/error';
 import { DEFAULT_SORT_OPTIONS, getSortOptions, QueryParams } from '../utils/query-options';
 
-const event = prisma.service;
-const serviceFormat = prisma.eventFormat;
-const eventTheme = prisma.eventTheme;
+const service = prisma.service;
 
 type FilterAttributes = {
   id?: string | string[];
@@ -26,27 +24,27 @@ const convertQueryParamToNumArr = (param: string | string[]): number[] => {
   return Array.isArray(param) ? param.map((item) => Number(item)) : [Number(param)];
 };
 
-export const getEventDate = (initialDate: Date) => {
+export const getServiceDate = (initialDate: Date) => {
   const date = new Date(initialDate);
   return new Intl.DateTimeFormat('en-US', DateFormatOptions).format(date);
 };
 
-const EventService = {
-  async findServiceIfExists(eventId: number) {
+const ServiceService = {
+  async findServiceIfExists(serviceId: number) {
     try {
-      return await event.findUniqueOrThrow({
-        where: { id: eventId },
+      return await service.findUniqueOrThrow({
+        where: { id: serviceId },
         include: { format: true, theme: true },
       });
     } catch (_e) {
-      throw new ClientError("The event doesn't exist!", 404);
+      throw new ClientError("The service doesn't exist!", 404);
     }
   },
 
-  async isUsersQueryAllowed(eventId: number, userId: number | undefined) {
-    const e = await event.findFirst({
+  async isUsersQueryAllowed(serviceId: number, userId: number | undefined) {
+    const e = await service.findFirst({
       where: {
-        id: eventId,
+        id: serviceId,
         OR: [
           {
             visitors: {
@@ -61,13 +59,13 @@ const EventService = {
     });
 
     const isAllowed = e !== null;
-    !isAllowed && logger.warn("You are not allowed to view the event's visitors");
+    !isAllowed && logger.warn("You are not allowed to view the service's visitors");
 
     return isAllowed;
   },
 
   async checkUniqueServiceName(name: string, notId: number = 0) {
-    const exists = await event.findFirst({
+    const exists = await service.findFirst({
       where: {
         name,
         NOT: {
@@ -76,25 +74,10 @@ const EventService = {
       },
     });
     if (exists) {
-      throw new ClientError('The event with this name already exists.', 400);
+      throw new ClientError('The service with this name already exists.', 400);
     }
   },
 
-  async checkServiceFormatExists(formatId: number) {
-    try {
-      await serviceFormat.findUniqueOrThrow({ where: { id: formatId } });
-    } catch (_e) {
-      throw new ClientError("The event format doesn't exist!", 400);
-    }
-  },
-
-  async checkServiceThemeExists(themeId: number) {
-    try {
-      await eventTheme.findUniqueOrThrow({ where: { id: themeId } });
-    } catch (_e) {
-      throw new ClientError("The event theme doesn't exist!", 400);
-    }
-  },
 
   getServicesSortOptions(params: QueryParams, defaultSort: string): any {
     const { _sort, _order } = params;
@@ -118,13 +101,11 @@ const EventService = {
   },
 
   getServicesWhereOptions(queryParams: FilterAttributes) {
-    const where: Prisma.EventWhereInput = {};
+    const where: Prisma.UserWhereInput = {};
     const {
       userId,
       id,
       companyId,
-      themeId,
-      formatId,
       q,
       upcoming,
       dateFrom,
@@ -137,12 +118,6 @@ const EventService = {
     }
     if (companyId) {
       where.companyId = Number(companyId);
-    }
-    if (formatId) {
-      where.formatId = Number(formatId);
-    }
-    if (themeId) {
-      where.themeId = Number(themeId);
     }
     if (userId) {
       where.visitors = {
@@ -175,4 +150,4 @@ const EventService = {
   },
 };
 
-export default EventService;
+export default ServiceService;

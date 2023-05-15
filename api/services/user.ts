@@ -7,6 +7,7 @@ import { QueryParams } from '../utils/query-options';
 import Avatar from './avatar';
 import Email from './email';
 import EventService from './event';
+import ServiceService from './service';
 import Token from './token';
 
 const user = prisma.user;
@@ -14,6 +15,7 @@ const user = prisma.user;
 type UserQueryParams = QueryParams & {
   companyId?: number;
   eventId?: number;
+  serviceId?: number;
 };
 
 interface IUser {
@@ -92,7 +94,7 @@ const UserService = {
       return { where, isViewAllowed };
     }
 
-    const { q, companyId, eventId } = params;
+    const { q, companyId, eventId, serviceId } = params;
 
     if (q) {
       const { q } = params;
@@ -127,6 +129,21 @@ const UserService = {
           events: {
             some: {
               eventId: Number(eventId),
+              isVisible: true,
+            },
+          },
+        });
+    }
+
+    if (serviceId) {
+      isViewAllowed = await ServiceService.isUsersQueryAllowed(Number(serviceId), userId);
+
+      isViewAllowed &&
+        Array.isArray(where.AND) &&
+        where.AND.push({
+          services: {
+            some: {
+              serviceId: Number(serviceId),
               isVisible: true,
             },
           },
