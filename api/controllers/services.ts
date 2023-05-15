@@ -11,6 +11,7 @@ import { HOURS_BEFORE_SERVICE } from '../consts/default';
 import wait from '../utils/wait';
 import ClientError from '../types/error';
 import CompanyService from '../services/company';
+import { Service, Prisma } from '@prisma/client';
 
 const service = prisma.service;
 
@@ -28,7 +29,7 @@ const createService = async (req: Request, res: Response) => {
   ]);
 
   const newService = await service.create({
-    data,
+    data: data as Prisma.ServiceCreateInput, // Cast data to the correct type
   });
 
   scheduleCompanySubscribersNotification(new Date(publishDate), newService.id);
@@ -79,7 +80,7 @@ const updateService = async (req: Request, res: Response) => {
 
   const updatedService = await service.update({
     where: { id: serviceId },
-    data,
+    data: data as Prisma.ServiceUpdateInput, // Cast data to the correct type
   });
 
   if (compareDates(new Date(publishDate), oldService.publishDate)) {
@@ -96,8 +97,7 @@ const updateService = async (req: Request, res: Response) => {
 const deleteService = async (req: Request, res: Response) => {
   const serviceId = Number(req.params.id);
 
-  const toUpdate = await service.findUnique({ where: { id: serviceId } });
-  await Avatar.removeFrom(toUpdate);
+ 
 
   const deletedService = await service.delete({
     where: { id: serviceId },
@@ -110,8 +110,6 @@ const updatePoster = async (req: Request, res: Response) => {
   const serviceId = Number(req.params.id);
   const picturePath = (req.file as Express.Multer.File).filename;
 
-  const toUpdate = await service.findUnique({ where: { id: serviceId } });
-  await Avatar.removeFrom(toUpdate);
 
   const updatedService = await service.update({
     where: {
@@ -128,8 +126,7 @@ const updatePoster = async (req: Request, res: Response) => {
 const deletePoster = async (req: Request, res: Response) => {
   const serviceId = Number(req.params.id);
 
-  const toUpdate = await service.findUnique({ where: { id: serviceId } });
-  await Avatar.removeFrom(toUpdate);
+
 
   const updatedService = await service.update({
     where: {
