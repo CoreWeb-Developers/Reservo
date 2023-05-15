@@ -23,8 +23,7 @@ import { createSchema } from '~/validation/service';
 import type { ICreate } from '~/validation/service';
 import PlacesSearch from '~/components/PlacesSearch/PlacesSearch';
 import AsyncSelectCompany from '~/components/Select/AsyncSelectCompany';
-import AsyncSelectFormat from '~/components/Select/AsyncSelectFormat';
-import AsyncSelectTheme from '~/components/Select/AsyncSelectTheme';
+
 import { SelectOptionData } from '~/types/select-option-data';
 import styles from '../service-form.styles';
 import layoutStyles from '~/components/Layout/layout.styles';
@@ -37,8 +36,6 @@ const ServiceCreateForm = () => {
   const [isFree, setIsFree] = useState<boolean>(false);
   const [isPublishNow, setIsPublishNow] = useState<boolean>(true);
   const [company, setCompany] = useState<SelectOptionData | null>(null);
-  const [format, setFormat] = useState<SelectOptionData | null>(null);
-  const [theme, setTheme] = useState<SelectOptionData | null>(null);
 
   const {
     register,
@@ -81,17 +78,6 @@ const ServiceCreateForm = () => {
     }
   }, [company]);
 
-  useEffect(() => {
-    if (format) {
-      setValue('formatId', format.id, { shouldValidate: true });
-    }
-  }, [format]);
-
-  useEffect(() => {
-    if (theme) {
-      setValue('themeId', theme.id, { shouldValidate: true });
-    }
-  }, [theme]);
 
   return (
     <Flex justify="center" align="flex-start" sx={layoutStyles.page}>
@@ -130,15 +116,15 @@ const ServiceCreateForm = () => {
                   <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
                 </FormControl>
               )}
-              <FormControl isInvalid={!!errors.ticketsAvailable} isRequired>
-                <FormLabel htmlFor="ticketsAvailable">Slots available</FormLabel>
+              <FormControl isInvalid={!!errors.slotsAvailable} isRequired>
+                <FormLabel htmlFor="slotsAvailable">Slots available</FormLabel>
                 <Input
-                  id="ticketsAvailable"
+                  id="slotsAvailable"
                   type="number"
                   placeholder="Slots available"
-                  {...register('ticketsAvailable', { valueAsNumber: true })}
+                  {...register('slotsAvailable', { valueAsNumber: true })}
                 />
-                <FormErrorMessage>{errors.ticketsAvailable?.message}</FormErrorMessage>
+                <FormErrorMessage>{errors.slotsAvailable?.message}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={!!errors.isNotificationsOn}>
                 <FormLabel htmlFor="isNotificationsOn">
@@ -185,16 +171,6 @@ const ServiceCreateForm = () => {
                 <FormLabel htmlFor="companyId">Company</FormLabel>
                 <AsyncSelectCompany company={company} setCompany={setCompany} />
                 <FormErrorMessage>Input company name please</FormErrorMessage>
-              </FormControl>
-              <FormControl isInvalid={!!errors.formatId} isRequired>
-                <FormLabel htmlFor="formatId">Format</FormLabel>
-                <AsyncSelectFormat format={format} setFormat={setFormat} />
-                <FormErrorMessage>Input format please</FormErrorMessage>
-              </FormControl>
-              <FormControl isInvalid={!!errors.themeId} isRequired>
-                <FormLabel htmlFor="themeId">Theme</FormLabel>
-                <AsyncSelectTheme theme={theme} setTheme={setTheme} />
-                <FormErrorMessage>Input theme please</FormErrorMessage>
               </FormControl>
               <Button type="submit" w="200px" colorScheme="blue" isLoading={isLoading}>
                 Create

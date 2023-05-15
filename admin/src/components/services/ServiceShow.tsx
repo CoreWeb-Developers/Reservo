@@ -31,12 +31,6 @@ const ServiceShow = () => (
           <NumberField source="ticketsAvailable" />
           <NumberField source="latitude" />
           <NumberField source="longitude" />
-          <ReferenceField label="Format" source="formatId" reference="formats">
-            <ChipField source="name" />
-          </ReferenceField>
-          <ReferenceField label="Theme" source="themeId" reference="themes">
-            <ChipField source="name" />
-          </ReferenceField>
           <DateField label="Publication date" source="publishDate" showTime />
           <DateField label="Date" source="date" showTime />
           <BooleanField label="Public" source="isPublic" />
