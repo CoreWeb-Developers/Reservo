@@ -7,11 +7,10 @@ import { DEFAULT_SORT_OPTIONS, getSortOptions, QueryParams } from '../utils/quer
 
 const service = prisma.service;
 
+
 type FilterAttributes = {
   id?: string | string[];
   companyId?: string | string[];
-  formatId?: string | string[];
-  themeId?: string | string[];
   userId?: string;
   upcoming?: boolean;
   notPublished?: boolean;
@@ -34,10 +33,9 @@ const ServiceService = {
     try {
       return await service.findUniqueOrThrow({
         where: { id: serviceId },
-        include: { format: true, theme: true },
       });
     } catch (_e) {
-      throw new ClientError("The service doesn't exist!", 404);
+      throw new ClientError("The Service doesn't exist!", 404);
     }
   },
 
@@ -81,27 +79,16 @@ const ServiceService = {
 
   getServicesSortOptions(params: QueryParams, defaultSort: string): any {
     const { _sort, _order } = params;
-    const relationProperties: string[] = ['theme', 'format'];
 
     if (!_sort || !_order) {
       return DEFAULT_SORT_OPTIONS(defaultSort);
-    }
-
-    if (relationProperties.includes(_sort)) {
-      return {
-        orderBy: {
-          [_sort]: {
-            name: _order.toLowerCase(),
-          },
-        },
-      };
     }
 
     return getSortOptions(params, defaultSort);
   },
 
   getServicesWhereOptions(queryParams: FilterAttributes) {
-    const where: Prisma.UserWhereInput = {};
+    const where: Prisma.ServiceWhereInput = {};
     const {
       userId,
       id,

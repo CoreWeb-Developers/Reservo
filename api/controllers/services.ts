@@ -24,14 +24,11 @@ const createService = async (req: Request, res: Response) => {
   }
 
   await Promise.all([
-    ServiceService.checkUniqueServiceName(data.name),
-    ServiceService.checkServiceFormatExists(data.formatId),
-    ServiceService.checkServiceThemeExists(data.themeId),
+    ServiceService.checkUniqueServiceName(data.name, 0),
   ]);
 
   const newService = await service.create({
     data,
-    include: { format: true, theme: true },
   });
 
   scheduleCompanySubscribersNotification(new Date(publishDate), newService.id);
@@ -62,12 +59,9 @@ const getManyServices = async (req: Request, res: Response) => {
       where,
       ...pagination,
       ...sort,
-      include: { format: true, theme: true },
     }),
     service.count({ where }),
   ]);
-
-  await wait(2000);
 
   res.setHeader('X-Total-Count', count);
   res.status(200).json(services);
@@ -81,14 +75,11 @@ const updateService = async (req: Request, res: Response) => {
   const [oldService] = await Promise.all([
     ServiceService.findServiceIfExists(serviceId),
     ServiceService.checkUniqueServiceName(data.name, serviceId),
-    ServiceService.checkServiceFormatExists(data.formatId),
-    ServiceService.checkServiceThemeExists(data.themeId),
   ]);
 
   const updatedService = await service.update({
     where: { id: serviceId },
     data,
-    include: { format: true, theme: true },
   });
 
   if (compareDates(new Date(publishDate), oldService.publishDate)) {
@@ -110,7 +101,6 @@ const deleteService = async (req: Request, res: Response) => {
 
   const deletedService = await service.delete({
     where: { id: serviceId },
-    include: { format: true, theme: true },
   });
 
   res.json(deletedService);
@@ -130,7 +120,6 @@ const updatePoster = async (req: Request, res: Response) => {
     data: {
       picturePath,
     },
-    include: { format: true, theme: true },
   });
 
   res.json(updatedService);
@@ -149,7 +138,6 @@ const deletePoster = async (req: Request, res: Response) => {
     data: {
       picturePath: null,
     },
-    include: { format: true, theme: true },
   });
 
   res.json(updatedService);
