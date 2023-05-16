@@ -18,8 +18,6 @@ const createSchema = z
     publishDate: z.coerce.date(),
     latitude: z.number().min(LATITUDE.min).max(LATITUDE.max),
     longitude: z.number().min(LONGITUDE.min).max(LONGITUDE.max),
-    companyId: z.number().positive(),
-    formatId: z.number().positive(),
     themeId: z.number().positive(),
   })
   .refine((data) => data.date >= data.publishDate, {
@@ -39,8 +37,6 @@ const updateSchema = z
     publishDate: z.coerce.date(),
     latitude: z.number().min(LATITUDE.min).max(LATITUDE.max),
     longitude: z.number().min(LONGITUDE.min).max(LONGITUDE.max),
-    formatId: z.number().positive(),
-    themeId: z.number().positive(),
   })
   .refine((data) => data.date >= data.publishDate, {
     message: 'Publication date must be before the service date',

@@ -8,22 +8,12 @@ export type Service = {
   latitude: number;
   longitude: number;
   price: number;
-  ticketsAvailable: number;
+  slotsAvailable: number;
   date: string;
   publishDate: string;
   isPublic: boolean;
   isNotificationsOn: boolean;
   companyId: number;
-  formatId: number;
-  themeId: number;
-  format: {
-    id: number;
-    name: string;
-  };
-  theme: {
-    id: number;
-    name: string;
-  };
 };
 
 export type ServicesResponse = {
@@ -40,8 +30,6 @@ export type ServicesParam = {
   upcoming?: boolean;
   notPublished?: boolean;
   companyId?: number;
-  formatId?: number;
-  themeId?: number;
   userId?: number;
   dateFrom?: string;
   dateTo?: string;
