@@ -8,7 +8,7 @@ const createSchema = yupResolver(
     name: Yup.string().required().min(SERVICE_NAME_LENGTH.min).max(SERVICE_NAME_LENGTH.max),
     description: Yup.string().required(),
     price: Yup.number().min(0).required(),
-    ticketsAvailable: Yup.number().positive().required(),
+    slotsAvailable: Yup.number().positive().required(),
     isNotificationsOn: Yup.boolean().required(),
     isPublic: Yup.boolean().required(),
     date: Yup.date().min(new Date()).required(),
@@ -32,8 +32,6 @@ const updateSchema = yupResolver(
     publishDate: Yup.date().max(Yup.ref('date')).required(),
     latitude: Yup.number().required().min(LATITUDE.min).max(LATITUDE.max),
     longitude: Yup.number().required().min(LONGITUDE.min).max(LONGITUDE.max),
-    formatId: Yup.number().positive().required(),
-    themeId: Yup.number().positive().required(),
   }),
 );
 
