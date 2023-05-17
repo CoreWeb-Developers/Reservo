@@ -25,7 +25,7 @@ const updateSchema = yupResolver(
     name: Yup.string().required().min(SERVICE_NAME_LENGTH.min).max(SERVICE_NAME_LENGTH.max),
     description: Yup.string().required(),
     price: Yup.number().min(0).required(),
-    ticketsAvailable: Yup.number().min(0).required(),
+    slotsAvailable: Yup.number().min(0).required(),
     isNotificationsOn: Yup.boolean().required(),
     isPublic: Yup.boolean().required(),
     date: Yup.date().required(),

@@ -19,7 +19,7 @@ const ServiceEdit = () => (
     <SimpleForm resolver={updateSchema}>
       <TextInput source="name" />
       <NumberInput source="price" />
-      <NumberInput source="ticketsAvailable" />
+      <NumberInput source="slotsAvailable" />
       <NumberInput source="latitude" />
       <NumberInput source="longitude" />
       <BooleanInput label="Public" source="isPublic" />

@@ -28,7 +28,7 @@ const ServiceShow = () => (
             <TextField source="name" />
           </ReferenceField>
           <NumberField source="price" />
-          <NumberField source="ticketsAvailable" />
+          <NumberField source="slotsAvailable" />
           <NumberField source="latitude" />
           <NumberField source="longitude" />
           <DateField label="Publication date" source="publishDate" showTime />
