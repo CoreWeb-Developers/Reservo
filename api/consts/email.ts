@@ -36,7 +36,7 @@ const templates = {
     file: 'event-reminder.pug',
   },
   SERVICE_REMINDER: {
-    subject: 'Your event will start soon',
+    subject: 'Your service will start soon',
     file: 'service-reminder.pug',
   },
 
