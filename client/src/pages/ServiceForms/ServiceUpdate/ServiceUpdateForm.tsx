@@ -22,8 +22,6 @@ import type { IUpdate } from '~/validation/service';
 import type { Service } from '~/types/service';
 import ServiceFormPoster from './ServiceFormPoster';
 import PlacesSearch from '~/components/PlacesSearch/PlacesSearch';
-import AsyncSelectFormat from '~/components/Select/AsyncSelectFormat';
-import AsyncSelectTheme from '~/components/Select/AsyncSelectTheme';
 import { SelectOptionData } from '~/types/select-option-data';
 import styles from '../service-form.styles';
 import layoutStyles from '~/components/Layout/layout.styles';
@@ -49,8 +47,7 @@ const ServiceUpdateForm = ({ service, setEdit }: IProps) => {
   const [publishDate, setPublishDate] = useState(defaultValues.publishDate.slice(0, 16));
   const [isFree, setIsFree] = useState<boolean>(Number(defaultValues.price) === 0);
   const [isPublishNow, setIsPublishNow] = useState<boolean>(new Date(defaultValues.publishDate) <= new Date());
-  const [format, setFormat] = useState<SelectOptionData | null>(getSelectDefaultOption(service.format));
-  const [theme, setTheme] = useState<SelectOptionData | null>(getSelectDefaultOption(service.theme));
+ 
 
   const {
     register,
@@ -96,18 +93,6 @@ const ServiceUpdateForm = ({ service, setEdit }: IProps) => {
     setValue('publishDate', new Date(), { shouldValidate: true });
     setPublishDate(new Date().toJSON().slice(0, 16));
   };
-
-  useEffect(() => {
-    if (format) {
-      setValue('formatId', format.id, { shouldValidate: true });
-    }
-  }, [format]);
-
-  useEffect(() => {
-    if (theme) {
-      setValue('themeId', theme.id, { shouldValidate: true });
-    }
-  }, [theme]);
 
   return (
     <Flex justify="center" align="flex-start" sx={layoutStyles.page}>
@@ -155,15 +140,15 @@ const ServiceUpdateForm = ({ service, setEdit }: IProps) => {
                   <FormErrorMessage>{errors.price?.message}</FormErrorMessage>
                 </FormControl>
               )}
-              <FormControl isInvalid={!!errors.ticketsAvailable}>
-                <FormLabel htmlFor="ticketsAvailable">Amount of tickets</FormLabel>
+              <FormControl isInvalid={!!errors.slotsAvailable}>
+                <FormLabel htmlFor="slotsAvailable">Amount of tickets</FormLabel>
                 <Input
-                  id="ticketsAvailable"
+                  id="slotsAvailable"
                   type="number"
                   placeholder="amount of tickets"
-                  {...register('ticketsAvailable', { valueAsNumber: true })}
+                  {...register('slotsAvailable', { valueAsNumber: true })}
                 />
-                <FormErrorMessage>{errors.ticketsAvailable?.message}</FormErrorMessage>
+                <FormErrorMessage>{errors.slotsAvailable?.message}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={!!errors.isNotificationsOn}>
                 <FormLabel htmlFor="isNotificationsOn">
@@ -200,18 +185,6 @@ const ServiceUpdateForm = ({ service, setEdit }: IProps) => {
                 setValue={setValue}
                 errors={errors}
               />
-              <FormControl isInvalid={!!errors.formatId}>
-                <FormLabel htmlFor="formatId">Format</FormLabel>
-                <AsyncSelectFormat format={format} setFormat={setFormat} />
-                <FormErrorMessage>Input format please</FormErrorMessage>
-              </FormControl>
-              <Input hidden {...register('formatId', { valueAsNumber: true })} />
-              <FormControl isInvalid={!!errors.themeId}>
-                <FormLabel htmlFor="themeId">Theme</FormLabel>
-                <AsyncSelectTheme theme={theme} setTheme={setTheme} />
-                <FormErrorMessage>Input theme please</FormErrorMessage>
-              </FormControl>
-              <Input hidden {...register('themeId', { valueAsNumber: true })} />
               <Button type="submit" w="200px" colorScheme="blue" isLoading={isLoading}>
                 Submit
               </Button>
