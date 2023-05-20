@@ -8,8 +8,8 @@ import { useGetServiceQuery } from '~/store/api/service-slice';
 import { Company } from '~/types/company';
 import IError from '~/types/error';
 import CompanyServicesCarousel from './Carousel/CompanyServicesCarousel';
-import SimilarServicesCarousel from './Carousel/ServicesCarousel';
-import Comments from './Comments/Comments';
+// import SimilarServicesCarousel from './Carousel/ServicesCarousel';
+// import Comments from './Comments/Comments';
 import CompanyInfo from './Info/CompanyInfo';
 import ServiceInfo from './Info/ServiceInfo';
 import ServiceUpdateForm from '~/pages/ServiceForms/ServiceUpdate/ServiceUpdateForm';
@@ -42,7 +42,7 @@ const ServicePage = () => {
         <Container pb="16">
           <ServiceInfo service={service} company={company as Company} setEdit={setIsEdit}></ServiceInfo>
           <CompanyInfo company={company as Company}></CompanyInfo>
-          <Comments serviceId={service.id} />
+          {/* <Comments serviceId={service.id} /> */}
           <CompanyServicesCarousel serviceId={service.id} companyId={service.companyId} />
         </Container>
       )}

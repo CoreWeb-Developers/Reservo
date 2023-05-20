@@ -9,8 +9,6 @@ import { ServicesParam } from '~/types/service';
 import NothingFound from './NothingFound';
 
 type Props = {
-  formatId?: number;
-  themeId?: number;
   q?: string;
   userId?: number;
   companyId?: number;
@@ -20,8 +18,6 @@ type Props = {
 };
 
 const ServiceList = ({
-  formatId,
-  themeId,
   userId,
   companyId,
   q,
@@ -39,8 +35,6 @@ const ServiceList = ({
     upcoming: true,
     notPublished: notPublished ? notPublished : undefined,
   };
-  formatId ? (params.formatId = formatId) : null;
-  themeId ? (params.themeId = themeId) : null;
   userId ? (params.userId = userId) : null;
   companyId ? (params.companyId = companyId) : null;
   q ? (params.q = q) : null;
