@@ -43,7 +43,6 @@ import {
     const { user } = useAppSelector((state) => state.profile);
     const serviceTitle = `${service.name} by ${company.name}`;
     const e = GET_DISPLAY_SERVICE(service);
-    const tags = [e.format.name, e.theme.name];
   
     const { isOpen: isFormOpen, onOpen: onFormOpen, onClose: onFormClose } = useDisclosure();
   
@@ -115,7 +114,7 @@ import {
             <Heading fontSize={{ base: '3xl', md: '5xl' }}>{serviceTitle.toUpperCase()}</Heading>
             <Text fontSize="xl">{e.description}</Text>
             <HStack spacing="4">
-              {tags.map((t, i) => (
+              {e.tags && e.tags.map((t, i) => (
                 <Tag size="lg" key={i} colorScheme="purple">
                   {t}
                 </Tag>
