@@ -13,7 +13,7 @@ type IProps = {
 const ServiceSearch = ({ setSearch }: IProps) => {
   const { register } = useForm<ISearch>();
 
-  const onChange = (e: React.FormService<HTMLInputElement>) => {
+  const onChange = (e: React.FormEvent<HTMLInputElement>) => {
     setSearch(e.currentTarget.value);
   };
 
