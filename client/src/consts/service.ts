@@ -36,4 +36,4 @@ export const GET_DISPLAY_SERVICE = (e: Service) => {
   };
 };
 
-export const FALLBACK_POSTER = '/assets/service-poster.png';
+export const FALLBACK_POSTER = '/assets/service-poster.jpg';
