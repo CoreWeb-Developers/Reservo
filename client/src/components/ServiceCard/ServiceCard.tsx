@@ -60,10 +60,6 @@ const ServiceCard = ({ service, isTicket = false, ...cardProps }: Props) => {
             </Heading>
           </ReactRouterLink>
 
-          <Wrap spacing="10px">
-            <Tag sx={styles.tag}>{service.theme.name}</Tag>
-            <Tag sx={styles.tag}>{service.format.name}</Tag>
-          </Wrap>
 
           <Text sx={styles.date}>{date}</Text>
 
@@ -71,7 +67,7 @@ const ServiceCard = ({ service, isTicket = false, ...cardProps }: Props) => {
 
           {!isTicket && (
             <Box sx={styles.price}>
-              <Text>Tickets left: {service.ticketsAvailable}</Text>
+              <Text>Slots left: {service.slotsAvailable}</Text>
               <Text>{price}</Text>
             </Box>
           )}
