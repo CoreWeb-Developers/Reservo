@@ -45,11 +45,6 @@ const NavbarAuth = () => {
                 My tickets
               </MenuItem>
             </MenuGroup>
-            <MenuGroup title="Services">
-              <MenuItem color="secondary" px={4} py={2} onClick={() => navigate('/profile/tickets')}>
-                My Services
-              </MenuItem>
-            </MenuGroup>
             <MenuDivider />
             <MenuGroup title="Account">
               <MenuItem px={4} py={2} onClick={() => navigate('/profile')}>
