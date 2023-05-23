@@ -20,11 +20,11 @@ const ServicePage = () => {
   const [getCompany, { data: company, isLoading: isLoadingCompany }] = useLazyGetCompanyQuery();
   const [isEdit, setIsEdit] = useState(false);
 
-  // useEffect(() => {
-  //   if (service && service.id) {
-  //     getCompany(service.companyId);
-  //   }
-  // }, [service]);
+  useEffect(() => {
+    if (service && service.id) {
+      getCompany(service.companyId);
+    }
+  }, [service]);
 
   if (isLoadingService || isLoadingCompany || ((!service || !company) && !error)) {
     return <Loader />;
