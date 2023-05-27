@@ -1,7 +1,6 @@
 import {
   Box,
   Flex,
-  Heading,
   HStack,
   Icon,
   IconButton,
@@ -15,13 +14,11 @@ import {
 import { useEffect, useRef } from 'react';
 import { FiMenu, FiX } from 'react-icons/fi';
 import { Link as ReactRouterLink, NavLink, useNavigate } from 'react-router-dom';
-import { LOGO_FONT } from '~/consts/components';
 import styles from './header.styles';
 import NavbarAuth from './NavbarAuth';
 
 const links = [
   { href: '/', label: 'Events' },
-  { href: '/', label: 'Services' },
   { href: '/companies', label: 'Businesses' },
 ];
 
