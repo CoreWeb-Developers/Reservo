@@ -16,7 +16,8 @@ const event = prisma.event;
 
 const createEvent = async (req: Request, res: Response) => {
   const data = req.body;
-  const { publishDate, date } = data;
+  const { publishDate, date, to_date } = data;
+  
 
   if (data.price !== 0) {
     const stripeId = await CompanyService.isStripeConnected(Number(data.companyId));
