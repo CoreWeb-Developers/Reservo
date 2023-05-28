@@ -3,6 +3,7 @@ import { SystemStyleObject } from '@chakra-ui/react';
 type TStyle = {
   card: SystemStyleObject;
   date: SystemStyleObject;
+  to_date: SystemStyleObject;
   price: SystemStyleObject;
   address: SystemStyleObject;
   company: SystemStyleObject;
@@ -22,6 +23,10 @@ const styles: TStyle = {
     },
   },
   date: {
+    color: 'secondary',
+    fontWeight: 'semibold',
+  },
+  to_date: {
     color: 'secondary',
     fontWeight: 'semibold',
   },
