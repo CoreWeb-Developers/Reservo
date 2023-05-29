@@ -50,6 +50,7 @@ const EventCreateForm = () => {
     resolver: zodResolver(createSchema),
     defaultValues: {
       publishDate: new Date(),
+      to_date: new Date(),
     },
   });
 
@@ -172,7 +173,7 @@ const EventCreateForm = () => {
                     valueAsDate: true,
                   })}
                 />
-                <FormErrorMessage>{errors.date?.message}</FormErrorMessage>
+                <FormErrorMessage>{errors.to_date?.message}</FormErrorMessage>
               </FormControl>
               <FormControl>
                 <FormLabel>Publish now</FormLabel>

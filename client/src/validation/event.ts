@@ -37,7 +37,7 @@ const updateSchema = z
     isNotificationsOn: z.boolean(),
     isPublic: z.boolean(),
     date: z.coerce.date().min(new Date(), { message: 'Set date in the future' }),
-    to_date: z.coerce.to_date().min(new Date(), { message: 'Set date in the future' }),
+    to_date: z.coerce.date().min(new Date(), { message: 'Set date in the future' }),
     publishDate: z.coerce.date(),
     latitude: z.number().min(LATITUDE.min).max(LATITUDE.max),
     longitude: z.number().min(LONGITUDE.min).max(LONGITUDE.max),
