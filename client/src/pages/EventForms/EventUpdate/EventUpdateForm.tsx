@@ -46,7 +46,7 @@ const EventUpdateForm = ({ event, setEdit }: IProps) => {
   const { picturePath, id, companyId, ...defaultValues } = event;
 
   const [date, setDate] = useState(defaultValues.date.slice(0, 16));
-   const [to_date, setDate] = useState(defaultValues.to_date.slice(0, 16));
+  const [to_date, setToDate] = useState(defaultValues.to_date.slice(0, 16));
   const [publishDate, setPublishDate] = useState(defaultValues.publishDate.slice(0, 16));
   const [isFree, setIsFree] = useState<boolean>(Number(defaultValues.price) === 0);
   const [isPublishNow, setIsPublishNow] = useState<boolean>(new Date(defaultValues.publishDate) <= new Date());
@@ -84,7 +84,7 @@ const EventUpdateForm = ({ event, setEdit }: IProps) => {
   };
 
   const onToDateChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setDate(e.target.value);
+    setToDate(e.target.value);
     setValue('to_date', new Date(e.target.value), { shouldValidate: true });
   };
 
