@@ -164,7 +164,7 @@ const EventCreateForm = () => {
                 />
                 <FormErrorMessage>{errors.date?.message}</FormErrorMessage>
               </FormControl>
-              <FormControl isInvalid={!!errors.date} isRequired>
+              <FormControl isInvalid={!!errors.to_date} isRequired>
                 <FormLabel htmlFor="to_date">To what date and time</FormLabel>
                 <Input
                   id="to_date"

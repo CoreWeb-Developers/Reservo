@@ -37,6 +37,7 @@ const createEvent = async (req: Request, res: Response) => {
 
   scheduleCompanySubscribersNotification(new Date(publishDate), newEvent.id);
   scheduleEventReminder(subtractHours(date, HOURS_BEFORE_EVENT), newEvent.id);
+  scheduleEventReminder(subtractHours(to_date, HOURS_BEFORE_EVENT), newEvent.id);
 
   res.status(201).json(newEvent);
 };
@@ -76,7 +77,7 @@ const getManyEvents = async (req: Request, res: Response) => {
 
 const updateEvent = async (req: Request, res: Response) => {
   const data = req.body;
-  const { publishDate, date } = data;
+  const { publishDate, date, to_date } = data;
   const eventId = Number(req.params.id);
 
   const [oldEvent] = await Promise.all([
@@ -98,6 +99,10 @@ const updateEvent = async (req: Request, res: Response) => {
 
   if (compareDates(new Date(date), oldEvent.date)) {
     scheduleEventReminder(subtractHours(date, HOURS_BEFORE_EVENT), eventId);
+  }
+
+  if (compareDates(new Date(to_date), oldEvent.to_date)) {
+    scheduleEventReminder(subtractHours(to_date, HOURS_BEFORE_EVENT), eventId);
   }
 
   res.json(updatedEvent);
