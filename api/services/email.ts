@@ -22,7 +22,7 @@ const Email = {
     const html = pug.renderFile(`${path.resolve('emails', template.file)}`, data);
 
     await transporter.sendMail({
-      from: `Ucode Uevent`,
+      from: `UcodeReservo`,
       to: email,
       subject: template.subject,
       html,
