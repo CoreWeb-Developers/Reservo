@@ -39,6 +39,7 @@ const EventShow = () => (
           </ReferenceField>
           <DateField label="Publication date" source="publishDate" showTime />
           <DateField label="Date" source="date" showTime />
+          <DateField label="To Date" source="to_date" showTime />
           <BooleanField label="Public" source="isPublic" />
           <BooleanField label="Notifications" source="isNotificationsOn" />
           <RichTextField source="description" />

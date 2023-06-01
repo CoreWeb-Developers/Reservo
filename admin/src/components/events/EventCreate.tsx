@@ -31,6 +31,7 @@ const EventCreate = () => (
       </ReferenceInput>
       <DateTimeInput label="Publication date" source="publishDate" />
       <DateTimeInput source="date" />
+      <DateTimeInput source="to_date" />
       <TextInput source="description" fullWidth multiline />
     </SimpleForm>
   </Create>

@@ -32,6 +32,7 @@ const EventEdit = () => (
       </ReferenceInput>
       <DateTimeInput label="Publication date" source="publishDate" />
       <DateTimeInput source="date" />
+      <DateTimeInput source="to_date" />
       <TextInput source="description" fullWidth multiline />
       <PosterField source="picturePath" />
       <ImageInput source="poster" label="Poster">
