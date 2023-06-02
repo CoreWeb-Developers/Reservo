@@ -67,9 +67,9 @@ const EventCard = ({ event, isTicket = false, ...cardProps }: Props) => {
             <Tag sx={styles.tag}>{event.format.name}</Tag>
           </Wrap>
 
-          <Text sx={styles.date}>{date}</Text>
+          <Text sx={styles.date}>From: {date}</Text>
 
-          <Text sx={styles.to_date}>{to_date}</Text>
+          <Text sx={styles.to_date}>To: {to_date}</Text>
 
           {address && <Text sx={styles.address}>{address}</Text>}
 
