@@ -1,6 +1,6 @@
 <head>
     <div align="center">
-        <h1 align="center">Uevent (Client)</h1>
+        <h1 align="center">Reservo (Client)</h1>
     </div>
 </head>
 
