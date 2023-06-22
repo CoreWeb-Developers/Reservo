@@ -2,7 +2,7 @@
   "name": "client",
   "private": true,
   "version": "0.0.0",
-  "homepage": "http://http://reservo.co.ke/",
+  "homepage": "http://reservo.co.ke/",
   "type": "module",
   "scripts": {
     "predeploy": "npm run build",
