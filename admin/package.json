@@ -2,6 +2,7 @@
   "name": "admin",
   "private": true,
   "version": "0.0.0",
+  "homepage": "http://administrator.reservo.co.ke/",
   "type": "module",
   "scripts": {
     "dev": "vite",
