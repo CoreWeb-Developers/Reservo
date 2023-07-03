@@ -3,10 +3,8 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
-  directUrl = env("DATABASE_URL_NON_POOLING") // uses a direct connection
-  shadowDatabaseUrl = env("DATABASE_URL_NON_POOLING") // used for migrations
 }
 
 model User {
