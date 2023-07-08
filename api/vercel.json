@@ -1,7 +1,42 @@
 {
-    "version": 2,
-    "builds": [
-      { "src": "api/package.json", "use": "@vercel/node" }
-    ]
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/server/**/*.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": { "framework": "react" }
+    },
+    {
+      "src": "admin/package.json",
+      "use": "@vercel/static-build",
+      "config": { "framework": "react" }
+    }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "api/server/$1" },
+    { "src": "/admin/(.*)", "dest": "admin/$1" },
+    { "src": "/(.*)", "dest": "client/$1" }
+  ],
+  "env": {
+    "DATABASE_URL": "your_database_url",
+    "CLIENT_URL": "http://reservo.co.ke",
+    "ADMIN_URL": "http://administrator.reservo.co.ke",
+    "SERVER_URL": "ep-shy-mouse-870414-pooler.us-east-1.postgres.vercel-storage.com",
+    "SERVER_PORT": "8000",
+    "TOKEN_SECRET": "secret",
+    "TOKEN_EXPIRES_IN": "24h",
+    "EMAIL_HOST": "smtp.mailtrap.io",
+    "EMAIL_PORT": "2525",
+    "EMAIL_USERNAME": "your_username",
+    "EMAIL_PASSWORD": "your_password",
+    "ADMIN_EMAIL": "admin@gmail.com",
+    "ADMIN_LOGIN": "admin",
+    "ADMIN_PASSWORD": "admin_password",
+    "STRIPE_API_SECRET_KEY": "some_key",
+    "STRIPE_WEBHOOK_KEY": "some_key"
   }
-  
+}
