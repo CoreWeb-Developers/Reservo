@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mssql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
