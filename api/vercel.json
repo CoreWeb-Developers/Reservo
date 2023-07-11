@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/server/**/*.js",
+      "src": "api/server/*.js",
       "use": "@vercel/node"
     }
   ],
@@ -10,5 +10,10 @@
     { "src": "/api/(.*)", "dest": "api/server/$1" },
     { "src": "/admin/(.*)", "dest": "admin/$1" },
     { "src": "/(.*)", "dest": "client/$1" }
-  ]
+  ],
+  "env": {
+    "CLIENT_URL": "https://reservo.netlify.app/",
+    "ADMIN_URL": "https://reservo-admin.netlify.app/",
+    "SERVER_PORT": "https://reservo-api.vercel.app/"
+  }
 }
