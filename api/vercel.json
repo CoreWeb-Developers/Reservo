@@ -14,6 +14,6 @@
   "env": {
     "CLIENT_URL": "https://reservo.netlify.app/",
     "ADMIN_URL": "https://reservo-admin.netlify.app/",
-    "SERVER_PORT": "https://reservo-api.vercel.app/"
+    "SERVER_URL": "https://reservo-api.vercel.app/"
   }
 }
