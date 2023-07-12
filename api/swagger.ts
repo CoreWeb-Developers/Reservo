@@ -6,7 +6,7 @@ export default {
       title: 'TheReservo API',
       description: 'Documentation of theReservo API',
     },
-    servers: [{ url: 'https://reservo-api.vercel.app/' }],
+    servers: [{ url: 'http://localhost:8080' }],
     components: {
       securitySchemes: {
         bearerAuth: {
