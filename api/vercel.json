@@ -2,18 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "./index.js",
+      "src": "server/index.ts",
       "use": "@vercel/node"
     }
   ],
   "routes": [
-    { "src": "/(./routes/*)", 
-    "dest": "/" }
-  ],
-  "env": {
-    "CLIENT_URL": "https://reservo.netlify.app/",
-    "ADMIN_URL": "https://reservo-admin.netlify.app/",
-    "SERVER_URL": "https://reservo-api.vercel.app/",
-    "SERVER_PORT": "80"
-  }
+    {
+      "src": "/api/.*",
+      "dest": "server/index.ts"
+    }
+  ]
 }
