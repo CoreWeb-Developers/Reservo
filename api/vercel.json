@@ -12,21 +12,9 @@
     { "src": "/(.*)", "dest": "client/$1" }
   ],
   "env": {
-    "DATABASE_URL": "mysql://admin:CTYQX3Vn3DArr7U1nH3h@reservo-ticketing.cmpswy8nxmnx.eu-north-1.rds.amazonaws.com:3306/reservo-ticketing",
     "CLIENT_URL": "https://reservo.netlify.app/",
     "ADMIN_URL": "https://reservo-admin.netlify.app/",
     "SERVER_URL": "https://reservo-api.vercel.app/",
-    "SERVER_PORT": "80",
-    "TOKEN_SECRET": "secret",
-    "TOKEN_EXPIRES_IN": "24h",
-    "EMAIL_HOST": "2525",
-    "EMAIL_USERNAME": "your_username",
-    "EMAIL_PASSWORD": "your_password",
-    "ADMIN_EMAIL": "admin@gmail.com",
-    "ADMIN_LOGIN": "admin",
-    "ADMIN_PASSWORD": "admin_password",
-    "STRIPE_API_SECRET_KEY": "some_key",
-    "STRIPE_WEBHOOK_KEY": "some_key"
-
+    "SERVER_PORT": "80"
   }
 }
