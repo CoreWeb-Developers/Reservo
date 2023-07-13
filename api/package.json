@@ -11,7 +11,8 @@
     "dev": "cross-env NODE_ENV=development concurrently \"tsc --watch\" \"nodemon --experimental-specifier-resolution=node -q dist/index.js\"",
     "start": "cross-env NODE_ENV=production node --experimental-specifier-resolution=node dist/index.js && npm run migrate",
     "migrate": "prisma migrate dev",
-    "prisma": "prisma studio"
+    "prisma": "prisma studio",
+    "vercel-build": "echo hello"
   },
   "repository": {
     "type": "git",

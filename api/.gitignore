@@ -43,3 +43,4 @@ npm-debug.log
 .vscode
 
 uploads/
+.vercel
