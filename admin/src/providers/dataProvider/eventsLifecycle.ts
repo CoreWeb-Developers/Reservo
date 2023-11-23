@@ -19,6 +19,7 @@ const eventsLifecycle = {
         isPublic: params.data.isPublic,
         isNotificationsOn: params.data.isNotificationsOn,
         date: params.data.date,
+        to_date: params.data.to_date,
         publishDate: params.data.publishDate,
         formatId: params.data.formatId,
         themeId: params.data.themeId,

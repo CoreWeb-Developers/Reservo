@@ -22,6 +22,8 @@ const PriceFormatOptions = {
 const EventCard = ({ event, isTicket = false, ...cardProps }: Props) => {
   const { data: company } = useGetCompanyQuery(event.companyId);
   const date = new Intl.DateTimeFormat('en-US', DateFormatOptions).format(new Date(event.date));
+  const to_date = new Intl.DateTimeFormat('en-US', DateFormatOptions).format(new Date(event.to_date));
+
   const price = Number(event.price) ? new Intl.NumberFormat('en-US', PriceFormatOptions).format(event.price) : 'free';
   const eventUrl = `/events/${event.id}`;
 
@@ -65,7 +67,9 @@ const EventCard = ({ event, isTicket = false, ...cardProps }: Props) => {
             <Tag sx={styles.tag}>{event.format.name}</Tag>
           </Wrap>
 
-          <Text sx={styles.date}>{date}</Text>
+          <Text sx={styles.date}>From: {date}</Text>
+
+          <Text sx={styles.to_date}>To: {to_date}</Text>
 
           {address && <Text sx={styles.address}>{address}</Text>}
 

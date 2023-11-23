@@ -50,6 +50,7 @@ const EventCreateForm = () => {
     resolver: zodResolver(createSchema),
     defaultValues: {
       publishDate: new Date(),
+      to_date: new Date(),
     },
   });
 
@@ -153,7 +154,7 @@ const EventCreateForm = () => {
                 <FormErrorMessage>{errors.isPublic?.message}</FormErrorMessage>
               </FormControl>
               <FormControl isInvalid={!!errors.date} isRequired>
-                <FormLabel htmlFor="date">Date</FormLabel>
+                <FormLabel htmlFor="date">Date and time</FormLabel>
                 <Input
                   id="date"
                   type="datetime-local"
@@ -162,6 +163,17 @@ const EventCreateForm = () => {
                   })}
                 />
                 <FormErrorMessage>{errors.date?.message}</FormErrorMessage>
+              </FormControl>
+              <FormControl isInvalid={!!errors.to_date} isRequired>
+                <FormLabel htmlFor="to_date">To what date and time</FormLabel>
+                <Input
+                  id="to_date"
+                  type="datetime-local"
+                  {...register('to_date', {
+                    valueAsDate: true,
+                  })}
+                />
+                <FormErrorMessage>{errors.to_date?.message}</FormErrorMessage>
               </FormControl>
               <FormControl>
                 <FormLabel>Publish now</FormLabel>

@@ -31,6 +31,11 @@ export const getEventDate = (initialDate: Date) => {
   return new Intl.DateTimeFormat('en-US', DateFormatOptions).format(date);
 };
 
+export const getEventDateTo = (initialDate: Date) => {
+  const to_date = new Date(initialDate);
+  return new Intl.DateTimeFormat('en-US', DateFormatOptions).format(to_date);
+};
+
 const EventService = {
   async findEventIfExists(eventId: number) {
     try {

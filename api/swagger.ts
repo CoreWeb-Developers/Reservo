@@ -3,10 +3,10 @@ export default {
     openapi: '3.0.0',
     info: {
       version: '1.0.0',
-      title: 'The Uevent API',
-      description: 'Documentation of the Uevent API',
+      title: 'TheReservo API',
+      description: 'Documentation of theReservo API',
     },
-    servers: [{ url: 'http://localhost:8080' }],
+    servers: [{ url: 'https://reservo-api.vercel.app/' }],
     components: {
       securitySchemes: {
         bearerAuth: {

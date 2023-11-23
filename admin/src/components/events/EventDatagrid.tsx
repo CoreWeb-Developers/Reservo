@@ -15,6 +15,7 @@ const EventDatagrid = () => (
       <ChipField source="name" />
     </ReferenceField>
     <DateField source="date" showTime />
+    <DateField source="to_date" showTime />
     <DateField source="publishDate" showTime />
     <BooleanField label="Public" source="isPublic" />
     <BooleanField label="Notifications" source="isNotificationsOn" />

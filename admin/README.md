@@ -1,6 +1,6 @@
 <head>
     <div align="center">
-        <h1 align="center">Uevent (Admin panel)</h1>
+        <h1 align="center">Reservo (Admin panel)</h1>
     </div>
 </head>
 

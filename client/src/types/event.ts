@@ -10,6 +10,7 @@ export type Event = {
   price: number;
   ticketsAvailable: number;
   date: string;
+  to_date: string;
   publishDate: string;
   isPublic: boolean;
   isNotificationsOn: boolean;

@@ -22,10 +22,10 @@ const HomePromo = () => {
               fontSize={{ base: '28px', sm: '30px', lg: '36px' }}
               mb={{ base: '10px', sm: '0' }}
             >
-              Boost Your Business with Our Freelancer & SMB Listing & Booking Platform!
+              Join us for a seamless ticketing experience with web 3 technology.
             </Heading>
             <Text fontSize={{ base: '16px', sm: '18px', lg: '20px' }}>
-            Showcase, Promote, and Book Services and Events with Ease!
+            Elevate your events with smart tickets/NFTs.
             </Text>
           </Flex>
           <PromoWavesAnim width="100%" />

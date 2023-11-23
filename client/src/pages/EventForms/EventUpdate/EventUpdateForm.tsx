@@ -46,6 +46,7 @@ const EventUpdateForm = ({ event, setEdit }: IProps) => {
   const { picturePath, id, companyId, ...defaultValues } = event;
 
   const [date, setDate] = useState(defaultValues.date.slice(0, 16));
+  const [to_date, setToDate] = useState(defaultValues.to_date.slice(0, 16));
   const [publishDate, setPublishDate] = useState(defaultValues.publishDate.slice(0, 16));
   const [isFree, setIsFree] = useState<boolean>(Number(defaultValues.price) === 0);
   const [isPublishNow, setIsPublishNow] = useState<boolean>(new Date(defaultValues.publishDate) <= new Date());
@@ -62,6 +63,7 @@ const EventUpdateForm = ({ event, setEdit }: IProps) => {
     defaultValues: {
       ...defaultValues,
       date: new Date(defaultValues.date),
+      to_date: new Date(defaultValues.to_date),
       publishDate: new Date(defaultValues.publishDate),
       price: Number(defaultValues.price),
     },
@@ -80,6 +82,12 @@ const EventUpdateForm = ({ event, setEdit }: IProps) => {
     setDate(e.target.value);
     setValue('date', new Date(e.target.value), { shouldValidate: true });
   };
+
+  const onToDateChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setToDate(e.target.value);
+    setValue('to_date', new Date(e.target.value), { shouldValidate: true });
+  };
+
 
   const onPublishDateChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPublishDate(e.target.value);
@@ -181,6 +189,11 @@ const EventUpdateForm = ({ event, setEdit }: IProps) => {
                 <FormLabel htmlFor="date">Date</FormLabel>
                 <Input id="date" type="datetime-local" value={date} onChange={onDateChange} />
                 <FormErrorMessage>{errors.date?.message}</FormErrorMessage>
+              </FormControl>
+              <FormControl isInvalid={!!errors.to_date}>
+                <FormLabel htmlFor="to_date">To what date</FormLabel>
+                <Input id="to_date" type="datetime-local" value={to_date} onChange={onToDateChange} />
+                <FormErrorMessage>{errors.to_date?.message}</FormErrorMessage>
               </FormControl>
               <FormControl>
                 <FormLabel>Publish now</FormLabel>

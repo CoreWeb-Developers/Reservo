@@ -1,5 +1,5 @@
 {
-  "name": "uevent",
+  "name": "Reservo",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -11,7 +11,8 @@
     "dev": "cross-env NODE_ENV=development concurrently \"tsc --watch\" \"nodemon --experimental-specifier-resolution=node -q dist/index.js\"",
     "start": "cross-env NODE_ENV=production node --experimental-specifier-resolution=node dist/index.js",
     "migrate": "prisma migrate dev",
-    "prisma": "prisma studio"
+    "prisma": "prisma studio",
+    "vercel-build": "echo hello"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,7 @@
     "cors": "^2.8.5",
     "cron": "^2.2.0",
     "cross-env": "^7.0.3",
-    "dotenv": "^16.0.3",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "joi": "^17.7.0",
     "jsonwebtoken": "^9.0.0",
@@ -52,7 +53,7 @@
     "@types/swagger-jsdoc": "^6.0.1",
     "@types/swagger-ui-express": "^4.1.3",
     "concurrently": "^7.6.0",
-    "nodemon": "^2.0.20",
+    "nodemon": "^3.0.1",
     "prisma": "^4.9.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^4.6.0",
