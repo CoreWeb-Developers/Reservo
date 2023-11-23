@@ -19,6 +19,7 @@ import NavbarAuth from './NavbarAuth';
 
 const links = [
   { href: '/', label: 'Events' },
+
   { href: '/companies', label: 'Businesses' },
 ];
 

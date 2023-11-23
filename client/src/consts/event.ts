@@ -5,7 +5,7 @@ export const STRIPE_API_KEY = import.meta.env.VITE_STRIPE_API_KEY;
 
 export const PRICE_FORMAT_OPTIONS = {
   style: 'currency',
-  currency: 'USD',
+  currency: 'KES',
 } as const;
 
 export const DATE_OPTIONS = {

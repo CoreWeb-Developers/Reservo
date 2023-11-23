@@ -5,6 +5,7 @@ import { User, UserRole } from '@prisma/client';
 
 const company = prisma.company;
 const event = prisma.event;
+const service = prisma.service;
 const comment = prisma.comment;
 const promoCode = prisma.promoCode;
 
@@ -38,6 +39,34 @@ const checkUserEventRights = async (req: Request, res: Response, next: NextFunct
     found = await event.findFirst({
       where: {
         id: eventId,
+        company: {
+          user: {
+            id: userId,
+          },
+        },
+      },
+    });
+    if (!found) {
+      return next(new ClientError('Forbidden action', 403));
+    }
+  }
+  next();
+};
+
+const checkUserServiceRights = async (req: Request, res: Response, next: NextFunction) => {
+  const serviceId = req.body.serviceId || Number(req.params.id);
+  const { id: userId, role } = req.user as User;
+
+  let found = await service.findUnique({
+    where: { id: serviceId },
+  });
+  if (!found) {
+    return next(new ClientError('The service is not found.', 404));
+  }
+  if (role !== UserRole.admin) {
+    found = await service.findFirst({
+      where: {
+        id: serviceId,
         company: {
           user: {
             id: userId,
@@ -101,6 +130,7 @@ const checkUserPromoCodeRights = async (req: Request, res: Response, next: NextF
 export {
   checkUserCompanyRights,
   checkUserEventRights,
+  checkUserServiceRights,
   checkUserCommentRights,
   checkUserPromoCodeRights,
 };

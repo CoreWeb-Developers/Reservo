@@ -12,6 +12,7 @@ import {
 import CompanyTitle from './CompanyTitle';
 import { AvatarField } from '../customFields/AvatarField';
 import EventDatagrid from '../events/EventDatagrid';
+import ServiceDatagrid from '../services/ServiceDatagrid';
 
 const CompanyShow = () => (
   <Show title={<CompanyTitle />}>
@@ -30,6 +31,11 @@ const CompanyShow = () => (
       <Tab label="Events">
         <ReferenceManyField reference="events" target="companyId" pagination={<Pagination />} label={false}>
           <EventDatagrid />
+        </ReferenceManyField>
+      </Tab>
+      <Tab label="Services">
+        <ReferenceManyField reference="services" target="companyId" pagination={<Pagination />} label={false}>
+          <ServiceDatagrid />
         </ReferenceManyField>
       </Tab>
     </TabbedShowLayout>

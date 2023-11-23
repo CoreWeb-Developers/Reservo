@@ -23,5 +23,6 @@ export type UsersParam = {
   _order?: Order;
   companyId?: number;
   eventId?: number;
+  serviceId: number;
   q?: string;
 };

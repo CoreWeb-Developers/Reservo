@@ -4,6 +4,7 @@ import authProvider from './providers/authProvider';
 
 import companies from './components/companies';
 import events from './components/events';
+import services from './components/services';
 import { formats, themes } from './components/formats-themes';
 import comments from './components/comments';
 import users from './components/users';
@@ -12,6 +13,7 @@ import promoCodes from './components/promo-codes';
 const App = () => (
   <Admin dataProvider={dataProvider} authProvider={authProvider} requireAuth>
     <Resource name="events" {...events} />
+    <Resource name="services" {...services} />
     <Resource name="companies" {...companies} />
     <Resource name="formats" {...formats} />
     <Resource name="themes" {...themes} />

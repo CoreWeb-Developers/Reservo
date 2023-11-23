@@ -37,6 +37,7 @@ import { AVATAR_PATH } from '~/consts/avatar';
 import Geocode from '~/consts/geocode';
 import styles from './company.styles';
 import CompanyEvents from './CompanyEvents';
+import CompanyServcies from './CompanyServices';
 import CustomAlert from '~/components/Alert/CustomAlert';
 import StripeButtons from './StripeButtons';
 
@@ -120,6 +121,9 @@ const CompanyInfo = ({ company, setEdit }: IProps) => {
           <Wrap spacing={4} alignSelf="flex-end">
             <Button as={RouterLink} to="/events/create" leftIcon={<AddIcon />}>
               Create event
+            </Button>
+            <Button as={RouterLink} to="/services/create" leftIcon={<AddIcon />}>
+              Create Service
             </Button>
             <Button onClick={() => setEdit(true)} leftIcon={<EditIcon />}>
               Edit

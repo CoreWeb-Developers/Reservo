@@ -6,7 +6,7 @@ export const profileLinks = [
     description: "All the companies you're subscribed to",
   },
   {
-    label: 'Your Companies',
+    label: 'Your Businesses',
     href: '/profile/companies',
     color: 'teal.200',
     description: "All the companies you've created",
@@ -16,5 +16,11 @@ export const profileLinks = [
     href: '/profile/tickets',
     color: 'purple.200',
     description: "All the tickets you've purchased",
+  },
+  {
+    label: 'Your Services',
+    href: '/profile/tickets',
+    color: 'orange.200',
+    description: "All the services you've booked",
   },
 ];
